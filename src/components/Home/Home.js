@@ -4,12 +4,7 @@ import classes from './Home.module.css'
 
 const Home = () => {
 
-  const categorylist=[
-    {name:"Best of Electronics",
-    items:{
-      
-    }}
-  ]
+
   return (
     <>
     <CategoryList/>
