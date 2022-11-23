@@ -1,0 +1,19 @@
+.carousel-control-prev{
+    position: absolute;
+    top: 30%;
+    padding: 30px 8px;
+    outline: none;
+    border: none;
+    border-radius: 0 7px 7px 0;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
+}
+.carousel-control-next{
+    position: absolute;
+    top: 30%;
+    right: 0;
+    padding: 30px 8px;
+    outline: none;
+    border: none;
+    border-radius: 7px 0 0 7px;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
+}

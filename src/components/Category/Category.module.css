@@ -1,0 +1,30 @@
+.main__category__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 112px;
+    background-color: #fff;
+    padding: 10px 0 0 0 ;
+    column-gap: 57px;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 16%);
+
+}
+.main__category__item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+.main__category__item__img{
+    width: 64px;
+    height: 64px;
+}
+.main__category__item__para{
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+.main__category__item:hover .main__category__item__para{ 
+    color: #2874f0;
+}
