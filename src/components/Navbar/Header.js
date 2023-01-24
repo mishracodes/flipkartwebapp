@@ -1,9 +1,9 @@
 import React from 'react'
-import classes from './Navbar.module.css'
+import classes from './Header.module.css'
 import logo from '../../Assets/logo.png'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-const Navbar = () => {
+const Header = () => {
   return (
     <div className={classes.nav__main}>
         <img src={logo} alt="logo" className={classes.nav_main_logo}/>
@@ -16,4 +16,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Header
