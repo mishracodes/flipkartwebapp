@@ -4,6 +4,7 @@ import MainCategory from './components/Category/MainCategory'
 import Header from './components/Navbar/Header'
 import './App.css'
 import Home from './components/Home/Home'
+import Footer from './components/Navbar/Footer'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Carousel/>
         <Home/>
       </div>
+      <Footer/>
     </div>
   )
 }
