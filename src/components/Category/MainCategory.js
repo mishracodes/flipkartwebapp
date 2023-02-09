@@ -25,7 +25,7 @@ const MainCategory = () => {
          src:"assets/05d708653beff580.png"},
     ]
   return (
-    <div className={classes.main__category__container}>
+    <div  style={{marginTop:"56px"}} className={classes.main__category__container}>
         {categories.map((e)=>{
             return  <CategoryItems key={e.src} name={e.name} src={e.src} />
         })}

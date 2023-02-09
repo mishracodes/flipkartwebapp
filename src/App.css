@@ -1,3 +1,18 @@
 .body__margin__gap{
     margin: 0 5px;
 }
+.MuiSlider-thumb{
+    color: #fff !important;
+    border: 1px solid #a6a4a4;
+    height: 16px !important;
+    width: 16px !important;
+}
+.MuiSlider-rail{
+    height: 2px !important;
+    color: #4f4f4f !important;
+} 
+.MuiSlider-track{
+    height: 6px !important;
+}
+
+

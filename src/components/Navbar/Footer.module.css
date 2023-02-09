@@ -42,11 +42,11 @@
     align-items: center;
     font-size: 14px;
 }
-span{
+.footer span{
     margin: 0 0 0 8px;
     color: #fff;
 }
-a{
+.footer a{
     text-decoration: none;
     color: #fff;
     border: none;
@@ -55,3 +55,4 @@ a{
 a:hover{
     color: #fff;
 }
+
