@@ -1,9 +1,229 @@
-.main{
-    background-color: #F1F3F6;
+.main {
+  background-color: #f1f3f6;
 }
-.detailContainer{
-    width: 90%;
-    margin: auto;
-    background-color: #fff;
-    padding: 16px;
+.detailContainer {
+  width: 90%;
+  margin: auto;
+  background-color: #fff;
+  padding: 16px;
+}
+.itemDetails {
+  display: flex;
+}
+.itemImages {
+  display: flex;
+  position: sticky;
+  top: 64px;
+  bottom: 0;
+
+  align-self: flex-start;
+}
+.itemThumbs {
+  display: flex;
+  flex-direction: column;
+}
+.itemThumbs > img {
+  width: 64px;
+  height: 64px;
+  padding: 5px;
+}
+.itemMainImage{
+  position: relative;
+  overflow: hidden;
+}
+.itemMainImage > img {
+  width: 415px;
+  height: 415px;
+  object-fit: contain;
+  margin: 20px;
+  cursor: crosshair;
+}
+.addCartButton {
+  display: flex;
+  font-size: 16px;
+  justify-content: space-around;
+}
+.addCartButton > div{
+  cursor: pointer;
+}
+.addCartButton > div:active {
+  transform: scale(0.95);
+  
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.addCartButton > div:nth-child(1) {
+  text-align: center;
+  padding: 18px 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  float: left;
+  width: 48%;
+  background: #ff9f00;
+  color: #fff;
+}
+.addCartButton > div:nth-child(2) {
+  text-align: center;
+
+  background: #fb641b;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  color: #fff;
+  padding: 18px 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  width: 48%;
+}
+.itemDescription {
+  padding: 0 16px;
+  position: relative;
+}
+.pagenation {
+  font-size: 12px;
+  color: #878787;
+}
+.itemTitle {
+  font-size: 18px;
+  columns: #212121;
+  margin: 6px 0;
+}
+
+.starRating {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding-right: 10px;
+}
+.starRating > img {
+  margin-left: 5px;
+}
+.starIcon {
+  position: relative;
+}
+.starIcon > div {
+  line-height: normal;
+  display: flex;
+  width: 40px;
+  height: 19px;
+  color: #fff;
+  padding: 2px 4px 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  vertical-align: middle;
+  background-color: #388e3c;
+}
+.starIcon > div > img {
+  margin: 2px 0 0 2px;
+  height: 10px;
+}
+
+.rating {
+  font-size: 14px;
+  padding-left: 8px;
+  font-weight: 500;
+  color: #878787;
+}
+.itemPrice {
+  padding-top: 7px;
+}
+.itemPrice > span:nth-child(1) {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 500;
+  color: #212121;
+}
+.itemPrice > span:nth-child(2) {
+  display: inline-block;
+  margin-left: 8px;
+  text-decoration: line-through;
+  font-size: 16px;
+  color: #878787;
+}
+.itemPrice > span:nth-child(3) {
+  display: inline-block;
+  margin-left: 8px;
+  color: #388e3c;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+  font-weight: 500;
+}
+.itemOffers {
+  margin: 10px 0;
+}
+.itemOffers > h2 {
+  color: #212121;
+  font-size: 16px;
+}
+.itemOffers > p {
+  margin-bottom: 0px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #212121;
+}
+.itemOffers > p > img {
+  width: 18px;
+  height: 18px;
+  margin: 0 5px 0 0;
+}
+.itemOffers > p > span {
+  font-weight: 500;
+  margin: 0 5px 0 0;
+}
+.itemInfo {
+  margin-top: 24px;
+  font-size: 14px;
+}
+.itemInfo > h2 {
+  color: #878787;
+  padding-right: 10px;
+  font-weight: 500;
+  float: left;
+  font-size: 14px;
+}
+.itemInfo > div {
+  margin-left: 110px;
+}
+.itemInfo > div > p {
+  color: #212121;
+  margin-bottom: 0;
+}
+.itemInfo > div > span {
+  color: #878787;
+  font-size: 12px;
+}
+.itemInfo > div > ul {
+  list-style: circle;
+  color: #212121;
+  padding-left: 16px;
+}
+.promoBanner {
+  margin: 12px 0;
+}
+.modelbox {
+  position: absolute;
+  left: 0px;
+  width: 800px;
+  height: 580px;
+  overflow: hidden;
+  z-index: 4;
+}
+.modelbox > img {
+}
+.pointerHover {
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  border-radius: 2px;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  height: 83px;
+  width: 204.016px;
+  transform: scale(0);
+  position: absolute;
+  background: url('../../Assets/cursorhoverbg.svg') repeat;
+  z-index: 4;
 }
