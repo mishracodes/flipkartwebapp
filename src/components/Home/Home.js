@@ -3,7 +3,7 @@ import Carousel from '../Carousel/Carousel'
 import MainCategory from '../Category/MainCategory'
 import CategoryList from '../CategoryList/CategoryList'
 import CuratedCategoryList from '../CategoryList/CuratedCategoryList'
-import classes from './Home.module.css'
+// import classes from './Home.module.css'
 
 const Home = () => {
 
