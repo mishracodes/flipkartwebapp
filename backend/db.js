@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const mongoURI ='mongodb+srv://mcodeskart:KswxErqmFoOjBA3l@cluster0.eanmbjk.mongodb.net/store';
+require('dotenv').config();
+
+const dbpass=process.env.DB_PASSWORD
+const mongoURI =`mongodb+srv://mcodeskart:${dbpass}@cluster0.eanmbjk.mongodb.net/store`;
 const connectToMongo = () => {
     mongoose.connect(mongoURI, () => {
         mongoose.set("strictQuery", true);
