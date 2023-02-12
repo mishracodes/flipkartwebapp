@@ -1,3 +1,115 @@
+
+.categoryListContainerSm{
+  background: linear-gradient(rgb(210,221,254), rgb(206, 217, 253));
+  display: none;
+  flex-direction: column;
+  margin: 8px 0 4px 0;
+  user-select: none;
+}
+.smlistHead{
+  background: url('https://rukminim1.flixcart.com/fk-p-reco/800/200/images/Recco_Vday_ced9fd.jpg?q=90');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+}
+.smlistHead h4{
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 34px;
+  margin: 0;
+}
+.smlistViewAll a{
+  background: #2874f0;
+  color: #fff;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: box-shadow 0.2s ease;
+  vertical-align: super;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  border: 1px solid #e0e0e0;
+}
+.smlistItems{
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  margin: 0 12px 4px 12px;
+
+}
+.itemOne{
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+  /* sm */
+  @media (max-width: 640px) {
+    .itemOne{
+      grid-template-columns: 50% 50%;
+    }
+  }
+
+.smItemCard{
+  background-color: white;
+  margin: 4px;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* padding: 8px 20px 8px 20px; */
+
+}
+.smItemImg{
+  width: 160px;
+  margin: 0 auto;
+}
+
+.smItemImgContainer{
+  position: relative;
+  margin: 0 auto;
+  width: 160px;
+  height: 160px;
+}
+.smItemImgContainer>img{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  opacity: 1;
+  max-width: 100%;
+  max-height: 100%;
+}
+.smItemCard>p{
+  color: rgba(32,34,36,1.00);
+  line-height: 16px;
+  font-size: 12px;
+  margin: 0;
+}
+.smItemCard>h4{
+  color: rgba(0,140,0,1.00);
+  margin-top: 2px;
+  line-height: 18px;
+  font-size: 14px;
+}
+  /* md */
+  @media (max-width: 820px) {
+    .categoryListContainer{
+      display: none !important;
+    }
+    .categoryListContainerSm{
+      display: flex;
+    }
+  }
 .categoryListContainer {
   display: flex;
   align-items: stretch;
@@ -8,6 +120,7 @@
   border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
 }
+
 .mainImage {
   width: 200px;
   min-width: 200px;

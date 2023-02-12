@@ -37,7 +37,7 @@ const Footer = () => {
                     <a href="/" className={classes.footerLink}>EPR Compliance</a>
                 </div>
 
-                <div><div className={classes.footerSubHead}>SOCIAL</div>
+                <div className='smHidden'><div className={classes.footerSubHead}>SOCIAL</div>
                     <a href="/" className={classes.footerLink}>Facebook</a>
                     <a href="/" className={classes.footerLink}>Twitter</a>
                     <a href="/" className={classes.footerLink}>YouTube</a>
@@ -76,7 +76,7 @@ const Footer = () => {
                 <div>
                     <HelpIcon sx={iconStyle} /><a href="/"><span >Help Center</span></a>
                 </div>
-                <span>© 2007-2023 Flipkart.com</span><img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="" />
+                <span>© 2007-2023 Flipkart.com</span><img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="" className='mdHidden'/>
             </div>
         </div>
     )

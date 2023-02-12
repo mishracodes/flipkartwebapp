@@ -16,3 +16,32 @@
 }
 
 
+/* //////responsive */
+/* sm */
+@media (max-width: 640px) {
+    .smHidden {
+      display: none !important;
+    }
+  }
+  
+  /* md */
+  @media (max-width: 768px) {
+    .mdHidden {
+      display: none !important;
+    }
+  }
+  
+  /* lg */
+  @media (max-width: 1024px) {
+    .lgHidden {
+      display: none !important;
+    }
+  }
+  
+  
+  /* xl */
+  @media (max-width: 1280px) {
+      .xlHidden {
+          display: none !important;
+        }
+  }

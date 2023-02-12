@@ -8,11 +8,11 @@ const Header = () => {
   return (
     <div className={classes.nav__main}>
         <Link to='/'><img src={logo} alt="logo" className={classes.nav_main_logo}/></Link>
-        <input type='text' placeholder='Search for products, brands and more'/>
+        <input type='text' placeholder='Search for products, brands and more' className='mdHidden'/>
         <p className={classes.nav__item__username}>Amit Mishra <ExpandMoreIcon className={classes.nav__item__expandmore_user} sx={{fontSize:"17px"}}/></p>
-        <p>Become a Seller</p>
+        <p className='xlHidden'>Become a Seller</p>
         <p className={classes.nav__item__more}>More <ExpandMoreIcon className={classes.nav__item__expandmore} sx={{fontSize:"17px"}}/></p>
-        <p className={classes.nav__cart}> <ShoppingCartIcon /> Cart</p>
+        <p className={classes.nav__cart}> <ShoppingCartIcon /> <span className='smHidden'>Cart</span></p>
     </div>
   )
 }

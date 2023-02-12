@@ -7,9 +7,9 @@ const CategoryList = (props) => {
 
   const categoryListStartRef = useRef()
   const categoryListEndRef = useRef()
-  const [nextButtonVisible,setnextButtonVisible]=useState(true)
-  const scrollIntoView=(ref)=> {
-    ref.current.scrollIntoView({behavior: 'smooth'})
+  const [nextButtonVisible, setnextButtonVisible] = useState(true)
+  const scrollIntoView = (ref) => {
+    ref.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   const categoryList = [
@@ -95,43 +95,69 @@ const CategoryList = (props) => {
   ]
 
   return (
-    <div className={classes.categoryListContainer}>
-      <div className={classes.mainImage} style={{ backgroundImage: `url(${props.mainImage})`}}>
-        <div className={classes.mainName}>
-          <h4>{props.mainName}</h4>
-          <div className={classes.viewAll}>
-            <a className={classes.viewAllUrl} href="https://www.flipkart.com/offers-list/content?screen=dynamic&amp;pk=themeViews%3DDT-OMU-1%3ADealcard~widgetType%3DdealCard~contentType%3Dneo&amp;wid=2.dealCard.OMU&amp;wid=3.dealCard.OMU_3&amp;otracker=hp_omu_Best%2Bof%2BElectronics_3&amp;otracker1=hp_omu_PINNED_neo%2Fmerchandising_Best%2Bof%2BElectronics_NA_wc_view-all_3">VIEW ALL</a>
+    <div className={classes.main}>
+      <div className={classes.categoryListContainer}>
+        <div className={classes.mainImage} style={{ backgroundImage: `url(${props.mainImage})` }}>
+          <div className={classes.mainName}>
+            <h4>{props.mainName}</h4>
+            <div className={classes.viewAll}>
+              <a className={classes.viewAllUrl} href="https://www.flipkart.com/offers-list/content?screen=dynamic&amp;pk=themeViews%3DDT-OMU-1%3ADealcard~widgetType%3DdealCard~contentType%3Dneo&amp;wid=2.dealCard.OMU&amp;wid=3.dealCard.OMU_3&amp;otracker=hp_omu_Best%2Bof%2BElectronics_3&amp;otracker1=hp_omu_PINNED_neo%2Fmerchandising_Best%2Bof%2BElectronics_NA_wc_view-all_3">VIEW ALL</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={classes.categoryList} >
-        <div className={classes.categoryListChild}>
-        <p ref={categoryListStartRef}></p>
-        {categoryList.map((e) => {
-          return (<div key={e.id} className={classes.category}>
-            <a href="/" className={classes.categoryUrl}>
-              <div className={classes.categoryImage}>
-                <div className={classes.categoryImgContainer}>
-                  <img src={e.imgSrc} alt="" />
-                </div>
-              </div>
-              <div className={classes.itemName}>{e.name}</div>
-              <div className={classes.priceRange}>{e.priceR}</div>
-              <div className={classes.itemCategory}>{e.category}</div>
-            </a>
-          </div>)
-        })}
-        <p ref={categoryListEndRef}></p>
+        <div className={classes.categoryList} >
+          <div className={classes.categoryListChild}>
+            <p ref={categoryListStartRef}></p>
+            {categoryList.map((e) => {
+              return (<div key={e.id} className={classes.category}>
+                <a href="/" className={classes.categoryUrl}>
+                  <div className={classes.categoryImage}>
+                    <div className={classes.categoryImgContainer}>
+                      <img src={e.imgSrc} alt="" />
+                    </div>
+                  </div>
+                  <div className={classes.itemName}>{e.name}</div>
+                  <div className={classes.priceRange}>{e.priceR}</div>
+                  <div className={classes.itemCategory}>{e.category}</div>
+                </a>
+              </div>)
+            })}
+            <p ref={categoryListEndRef}></p>
+
+          </div>
+
+          {!nextButtonVisible && <button className={classes.categoryListprev} type="button" onClick={() => { scrollIntoView(categoryListStartRef); setnextButtonVisible(true) }}>
+            <ArrowBackIosNewIcon />
+          </button>}
+          {nextButtonVisible && <button className={classes.categoryListnext} type="button" onClick={() => { scrollIntoView(categoryListEndRef); setnextButtonVisible(false) }}>
+            <ArrowForwardIosIcon />
+          </button>}
 
         </div>
+      </div>
+      <div className={classes.categoryListContainerSm}>
+        <div className={classes.smlistHead}>
+          <h4>{props.mainName}</h4>
+          <div className={classes.smlistViewAll}><a href="https://www.flipkart.com/offers-list/content?screen=dynamic&amp;pk=themeViews%3DDT-OMU-1%3ADealcard~widgetType%3DdealCard~contentType%3Dneo&amp;wid=2.dealCard.OMU&amp;wid=3.dealCard.OMU_3&amp;otracker=hp_omu_Best%2Bof%2BElectronics_3&amp;otracker1=hp_omu_PINNED_neo%2Fmerchandising_Best%2Bof%2BElectronics_NA_wc_view-all_3">View all</a></div>
+        </div>
+        <div className={classes.smlistItems}>
+          <div  className={classes.itemOne}>
+        {categoryList.map((e) => {
+            return(<div key={e.id} className={classes.smItemCard}>
+                <div className={classes.smItemImg}>
+                  <div className={classes.smItemImgContainer}>
+                    <img src={e.imgSrc} alt=''/>
+                  </div>
+                </div>
+                <p>{e.category}</p>
+                <h4>{e.name}</h4>
+              </div>
 
-        {!nextButtonVisible&&<button className={classes.categoryListprev} type="button" onClick={()=>{scrollIntoView(categoryListStartRef); setnextButtonVisible(true)}}>
-          <ArrowBackIosNewIcon />
-        </button>}
-        {nextButtonVisible&&<button className={classes.categoryListnext} type="button" onClick={()=>{scrollIntoView(categoryListEndRef); setnextButtonVisible(false)}}>
-          <ArrowForwardIosIcon />
-        </button>}
-
+           )
+            })}
+            </div>
+            
+        </div>
       </div>
     </div>
   )
