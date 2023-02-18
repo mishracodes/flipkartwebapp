@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const connectToMongo = require('./db');
 const app = express()
-const port = 4242
+const PORT = process.env.PORT || 4242;
 connectToMongo()
 
 var bodyParser = require('body-parser');
@@ -15,6 +15,6 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/categories', require('./routes/categories'))
 app.use('/api/products', require('./routes/products'))
 
-app.listen(port, () => {
-  console.log(`shipprkart API listening on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`shipprkart API listening on port ${PORT}`)
 })
