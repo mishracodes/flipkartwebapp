@@ -43,7 +43,7 @@ const Footer = () => {
                     <a href="/" className={classes.footerLink}>YouTube</a>
                 </div>
 
-                <div><div className={classes.footerSubHead}>Mail Us:</div>
+                <div className='lgHidden'><div className={classes.footerSubHead}>Mail Us:</div>
                     <p className={classes.footerText}>Flipkart Internet Private Limited,</p>
                     <p className={classes.footerText}>Buildings Alyssa, Begonia &</p>
                     <p className={classes.footerText}>Clove Embassy Tech Village,</p>
@@ -65,18 +65,18 @@ const Footer = () => {
             </div>
             <div className={classes.footerBottom}>
                 <div>
-                    <WorkIcon sx={iconStyle} /><a href="/"><span >Become a Seller</span></a>
+                    <WorkIcon sx={iconStyle} /><a href="/"><span  className='smHidden'>Become a Seller</span></a>
                 </div>
                 <div>
-                    <StarsIcon sx={iconStyle} /><a href="/"><span >Advertise</span></a>
+                    <StarsIcon sx={iconStyle} /><a href="/"><span  className='mdHidden'>Advertise</span></a>
                 </div>
                 <div>
-                    <CardGiftcardIcon sx={iconStyle} /><a href="/"><span >Gift Cards</span></a>
+                    <CardGiftcardIcon sx={iconStyle} /><a href="/"><span  className='smHidden'>Gift Cards</span></a>
                 </div>
                 <div>
-                    <HelpIcon sx={iconStyle} /><a href="/"><span >Help Center</span></a>
+                    <HelpIcon sx={iconStyle} /><a href="/"><span  className='smHidden'>Help Center</span></a>
                 </div>
-                <span>© 2007-2023 Flipkart.com</span><img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="" className='mdHidden'/>
+                <span>© 2007-2023 Flipkart.com</span><img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="" className='xlHidden'/>
             </div>
         </div>
     )

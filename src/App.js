@@ -7,7 +7,7 @@ import ItemsListV1 from './components/ItemsList/ItemsListV1'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ItemsListV2 from './components/ItemsList/ItemsListV2'
 import ItemDetail from './components/ItemDetail/ItemDetail'
-
+ 
 const App = () => {
   return (
     <BrowserRouter>

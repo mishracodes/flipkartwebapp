@@ -1,11 +1,36 @@
 const express = require('express');
 const router = express.Router();
 const Products = require('../models/Products')
+
+
+// function printStudents(pageNumber, nPerPage) {
+//   print( "Page: " + pageNumber );
+//   db.students.find()
+//              .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 )
+//              .limit( nPerPage )
+//              .forEach( student => {
+//                print( student.name );
+//              } );
+// }
+
+
 //ROUTE:1 Fetch all Products: GET "/api/products/list". Login NOT required
-router.get("/list", async (req, res) => {
+router.get("/list/:page", async (req, res) => {
+  let pageNumber=req.params.page
+  let nPerPage=20
   try {
-    const products = await Products.find({});
-    res.json(products);
+    // const products_total = await Products.find({})
+    const products = await Products.find({})
+                                   .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 )
+                                   .limit( nPerPage );
+
+
+    res.json(
+        {"page":pageNumber,
+          results:products,
+          "total_results": 19996,
+          "total_pages": Math.round(19996/20)
+        });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
@@ -28,8 +53,8 @@ router.post('/add', async (req, res) => {
 
 
 
-    const { name, image, categoryID, subCategoryID, rating, price, discountPrice, fAssured, description, brand } = req.body
-    const newProduct = new Products({ name, image, categoryID, subCategoryID, rating, price, discountPrice, fAssured, description, brand })
+    const { name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description } = req.body
+    const newProduct = new Products({ name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description })
     const saveProduct = await newProduct.save();
     res.send(saveProduct);
 
@@ -48,19 +73,20 @@ router.put('/edit/:id', async (req, res) => {
     // if("6265107b17c6a25656bd3e3b"!==req.user.id)
     // return res.status(401).send({Error:"Not Allowed"});
 
-    const { name, image, categoryID, subCategoryID, rating, price, discountPrice, fAssured, description, brand } = req.body
+    const { name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description } = req.body
     //create a new product
     const newProduct = {};
     if (name) newProduct.name = name;
-    if (image) newProduct.image = image;
-    if (categoryID) newProduct.categoryID = categoryID;
-    if (subCategoryID) newProduct.subCategoryID = subCategoryID;
-    if (rating) newProduct.rating = rating;
+    if (subcategory) newProduct.subcategory = subcategory;
     if (price) newProduct.price = price;
     if (discountPrice) newProduct.discountPrice = discountPrice;
+    if (image) newProduct.image = image;
     if (fAssured) newProduct.fAssured = fAssured;
-    if (description) newProduct.description = description;
+    if (rate) newProduct.rate = rate;
+    if (count) newProduct.count = count;
     if (brand) newProduct.brand = brand;
+    if (specifications) newProduct.specifications = specifications;
+    if (description) newProduct.description = description;
 
 
     //find the product to  edit and update it 
@@ -103,6 +129,8 @@ router.delete('/delete/:id', async (req, res) => {
 //ROUTE:5 Set Bulk Products: POST "/api/products/setbulkproduct". Login required 
 // router.post('/admsetbulkproduct',fetchuser, async(req,res)=>{
 router.post('/addbulk', async (req, res) => {
+  // console.log(req);
+
   try {
     // if("6265107b17c6a25656bd3e3b"!==req.user.id)
     // return res.status(401).send({Error:"Not Allowed"});
@@ -114,8 +142,10 @@ router.post('/addbulk', async (req, res) => {
     // }
     let data = await req.body.data;
     for (let i in data) {
-      const {  name, image, categoryID, subCategoryID, rating, price, discountPrice, fAssured, description, brand  } = data[i];
-      const newProduct = new Products({  name, image, categoryID, subCategoryID, rating, price, discountPrice, fAssured, description, brand  })
+      console.log(data[i]);
+      
+      const {  name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description   } = data[i];
+      const newProduct = new Products({  name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description   })
       await newProduct.save();
     }
     res.send({ success: "success" })

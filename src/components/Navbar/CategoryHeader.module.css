@@ -10,13 +10,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
+    width: 94%;
     height: 100%;
     margin: auto;
-}.mainMenu>li{
+    padding: 0;
+}
+.mainMenu>li{
     list-style: none;
     font-weight: 500;
-    margin: 0 10px;
+    margin: 0 8px;
     cursor: pointer;
     position: relative;
     height: 100%;
