@@ -151,8 +151,9 @@ const ItemsListV1 = () => {
                                 <div className={classes.itemImageholder}>
                                     <div className={classes.itemImage}>
                                         
-                                            <img src={e.image[0].replace("http://img5a.flixcart.com", "https://mishracodes.netlify.app/pathx")} alt=""/>
-                                        {console.log(e.image[0].replace("http://img5a.flixcart.com", "https://mishracodes.netlify.app/pathx"))}
+                                            <img src={e.image[0].replace("http://img5a.flixcart.com", "https://flipkartv2.netlify.app/pathx")} alt=""/>
+                                            
+                                        {console.log(e.image[0].replace("http://img5a.flixcart.com", "https://flipkartv2.netlify.app/pathx"))}
                                     </div>
                                     
                                 </div>
