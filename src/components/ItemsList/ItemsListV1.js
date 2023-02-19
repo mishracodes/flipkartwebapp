@@ -4,7 +4,8 @@ import classes from './ItemsListV1.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryHeader from '../Navbar/CategoryHeader';
 import star from '../../Assets/star.svg'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 function valuetext(value) {
     return `${value}°C`;
 }
@@ -16,6 +17,18 @@ const ItemsListV1 = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const {id}=useParams();
+    const [itemsList, setitemsList] = useState()
+    const getitemsList= async () => {
+        const result = await fetch(`https://shipprkart.onrender.com/api/products/list/subcategory/${id}/1`);
+        const data = await result.json()
+        setitemsList(data)
+    }
+    useEffect(() => {
+        getitemsList()
+    }, [])
+// console.log('itemslist',itemsList);
 
     return (
         <>
@@ -132,320 +145,41 @@ const ItemsListV1 = () => {
 
 
                         {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
+                        {itemsList&&itemsList.products.map(e=><div key={e._id} className={classes.item}>
                             <div className={classes.itemHolder}>
                                 <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
+                                    <div className={classes.itemImage}>
+                                        
+                                            <img src={e.image[0]} alt=""/>
+                                        
+                                    </div>
+                                    
                                 </div>
+                                <div  className={classes.markFavourite}>
+                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
                                 <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
+                                {e.name}
                                 </div>
                                 <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
+                                    {e.brand}
                                 </div>
                                 <div className={classes.starRating}>
                                         <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
+                                            <div>{e.rate}<img src={star} alt="" /></div>
                                         </span>
-                                        <span className={classes.rating}>142.5</span>
+                                        <span className={classes.rating}>{e.count}</span>
                                     </div>
                                     <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
+                                        <span>₹{e.discountPrice}</span>
+                                        <span>₹{e.price}</span>
+                                        <span>{Math.round((e.discountPrice/e.price)*100)}% off</span>
                                     </div>
                             </div>
 
-                        </div>
+                        </div>)}
 
                         
 
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
-
-                        
-
-                        {/* Item goes here /////////////// */}
-                        <div className={classes.item}>
-                            <div className={classes.itemHolder}>
-                                <div className={classes.itemImageholder}>
-                                    <Link to="/detail/watch"><img height="200px" width="200px" src="https://rukminim1.flixcart.com/image/612/612/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt=""/></Link>
-                                    <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                </div>
-                                <div className={classes.itemTitle}>
-                                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetoo...
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    Black Strap, Free Size
-                                </div>
-                                <div className={classes.starRating}>
-                                        <span className={classes.starIcon}>
-                                            <div>4<img src={star} alt="" /></div>
-                                        </span>
-                                        <span className={classes.rating}>142.5</span>
-                                    </div>
-                                    <div className={classes.itemPrice}>
-                                        <span>₹491</span>
-                                        <span>₹1,199</span>
-                                        <span>59% off</span>
-                                    </div>
-                            </div>
-
-                        </div>
 
                         
 

@@ -228,34 +228,46 @@ align-items: center;
 
 }
 .itemHolder{
+    position: relative;
     padding: 16px;
 }
 .itemImageholder{
-    position: relative;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 200px;
 
 }
+.itemImage{
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+}
 .itemImageholder img{
-    margin: 25px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    opacity: 1;
+    max-width: 100%;
+    max-height: 100%;
 
 }
 .markFavourite{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
 }
 .itemTitle{
     font-size: 14px;
-    columns: #212121;
+    color: #212121;
     cursor: pointer;
     padding-bottom: 4px;
 }
 .itemDesc{
     font-size: 12px;
-    columns: #878787;
+    color: #878787;
     padding-bottom: 4px;
 }
 .starRating {
@@ -270,7 +282,6 @@ align-items: center;
   .starIcon > div {
     line-height: normal;
     display: flex;
-    width: 30px;
     height: 19px;
     color: #fff;
     padding: 2px 4px 2px 6px;

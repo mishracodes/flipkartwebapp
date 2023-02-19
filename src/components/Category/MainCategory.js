@@ -4,7 +4,7 @@ import CategoryItems from './CategoryItems'
 const MainCategory = () => {
    const [categories, setcategories] = useState()
    const getCategories=async()=>{
-    const result=await fetch('http://localhost:4242/api/categories/list');
+    const result=await fetch('https://shipprkart.onrender.com/api/categories/list');
     const data= await result.json()    
     setcategories(data)
    }

@@ -1,13 +1,13 @@
 const express = require("express");
 // const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
-const Category = require("../models/Categories");
+const Subcategory = require("../models/Subcategories");
 
 //ROUTE:1 Fetch all categories: GET "/api/categories/list". Login NOT required
 router.get("/list", async (req, res) => {
   try {
-    const categoryies = await Category.find({});
-    res.json(categoryies);
+    const subcategories = await Subcategory.find({});
+    res.json(subcategories);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
@@ -15,7 +15,7 @@ router.get("/list", async (req, res) => {
 });
 
 
-//ROUTE:2 Set Category: POST "/api/category/setcategory". Login required 
+//ROUTE:2 Set Subcategory: POST "/api/subcategories/setcategory". Login required 
 // router.post('/admsetcategory',fetchuser, async(req,res)=>{
 router.post('/add', async(req,res)=>{
   try{
@@ -23,14 +23,14 @@ router.post('/add', async(req,res)=>{
       // if("6265107b17c6a25656bd3e3b"!==req.user.id)
       // return res.status(401).send({Error:"Not Allowed"});
 
-      let catgerory = await Category.findOne({ name: req.body.name });
-      if (catgerory) {
-        return res.status(400).json({ error: "Sorry a category with this name already exists" })
+      let subcategory = await Subcategory.findOne({ name: req.body.name });
+      if (subcategory) {
+        return res.status(400).json({ error: "Sorry a subcategory with this name already exists" })
       }
-      const {name,image}=req.body
-      const newCategory=new Category({name,image})
-      const saveCategory=await newCategory.save();
-      res.send(saveCategory);
+      const {name,category,image}=req.body
+      const newSubcategory=new Subcategory({name,category,image})
+      const saveSubcategory=await newSubcategory.save();
+      res.send(saveSubcategory);
 
   }
   catch(error){
@@ -40,26 +40,27 @@ router.post('/add', async(req,res)=>{
   
   })
 
-  //ROUTE:3 Edit Category: PUT "/api/category/editcategory". Login required 
+  //ROUTE:3 Edit Subcategory: PUT "/api/category/editcategory". Login required 
 // router.put('/admeditcategory/:id',fetchuser, async(req,res)=>{
   router.put('/edit/:id', async(req,res)=>{
   try{
       // if("6265107b17c6a25656bd3e3b"!==req.user.id)
       // return res.status(401).send({Error:"Not Allowed"});
 
-      const {name,image}=req.body
+      const {name,category,image}=req.body
       //create a new category
-      const newCategory={};
-      if(name)newCategory.name=name;
-      if(image)newCategory.image=image;
+      const newSubcategory={};
+      if(name)newSubcategory.name=name;
+      if(category)newSubcategory.category=category;
+      if(image)newSubcategory.image=image;
 
 
       //find the category to  edit and update it 
-      let category =await Category.findById(req.params.id);
-      if(!category)return res.status(404).send("Not Found")
+      let subcategory =await Subcategory.findById(req.params.id);
+      if(!subcategory)return res.status(404).send("Not Found")
 
-      category= await Category.findByIdAndUpdate(req.params.id,{$set: newCategory},{new:true})
-      res.json({category});
+      subcategory= await Subcategory.findByIdAndUpdate(req.params.id,{$set: newSubcategory},{new:true})
+      res.json({subcategory});
   
   }
   catch(error){
@@ -69,7 +70,7 @@ router.post('/add', async(req,res)=>{
   
   })
 
-  //ROUTE:4 Delete Category: DELETE "/api/category/deletecategory". Login required 
+  //ROUTE:4 Delete Subcategory: DELETE "/api/category/deletecategory". Login required 
 // router.delete('/admdeletecategory/:id',fetchuser, async(req,res)=>{
   router.delete('/delete/:id', async(req,res)=>{
   try{
@@ -77,11 +78,11 @@ router.post('/add', async(req,res)=>{
       // return res.status(401).send({Error:"Not Allowed"});
       
        //find the note to delete it 
-       let category =await Category.findById(req.params.id);
-       if(!category)return res.status(404).send("Not Found")
+       let subcategory =await Subcategory.findById(req.params.id);
+       if(!subcategory)return res.status(404).send("Not Found")
 
-       category = await Category.findByIdAndDelete(req.params.id)
-     res.json({ "Success": "Category has been deleted", category: category });
+       subcategory = await Subcategory.findByIdAndDelete(req.params.id)
+     res.json({ "Success": "Subcategory has been deleted", subcategory: subcategory });
   
   }
   catch(error){
@@ -91,7 +92,7 @@ router.post('/add', async(req,res)=>{
   
   })
 
-  //ROUTE:5 Set Bulk Category: POST "/api/category/setbulkcategory". Login required 
+  //ROUTE:5 Set Bulk Subcategory: POST "/api/category/setbulkcategory". Login required 
   // router.post('/admsetbulkcategory',fetchuser, async(req,res)=>{
 router.post('/addbulk', async(req,res)=>{
   try{
@@ -105,9 +106,9 @@ router.post('/addbulk', async(req,res)=>{
       // }
        let  data= await req.body.data;
       for(let i in data){
-          const {name,image}=data[i];
-          const newCategory=new Category({name,image})
-          await newCategory.save();
+          const {name,category,image}=data[i];
+          const newSubcategory=new Subcategory({name,category,image})
+          await newSubcategory.save();
       }
       res.send({success:"success"})
   }
@@ -117,6 +118,20 @@ router.post('/addbulk', async(req,res)=>{
   }
   
   })
+
+  
+//ROUTE:1 Fetch all categories: GET "/api/categories/list". Login NOT required
+router.get("/list/category/:id", async (req, res) => {
+    try {
+        const categoryid=req.params.id;
+
+      const subcategories = await Subcategory.find({category:categoryid});
+      res.json(subcategories);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  });
   
 ///////////////////////////////////////////////category ends here/////////////////////////////
 
