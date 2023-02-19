@@ -4,7 +4,7 @@ import classes from './ItemsListV1.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryHeader from '../Navbar/CategoryHeader';
 import star from '../../Assets/star.svg'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 function valuetext(value) {
     return `${value}°C`;
@@ -27,6 +27,7 @@ const ItemsListV1 = () => {
     }
     useEffect(() => {
         getitemsList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 // console.log('itemslist',itemsList);
 
