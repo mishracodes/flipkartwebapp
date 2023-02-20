@@ -228,6 +228,7 @@ align-items: center;
 
 }
 .itemHolder{
+    text-decoration: none;
     position: relative;
     padding: 16px;
 }
@@ -257,7 +258,7 @@ align-items: center;
 .markFavourite{
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 0px;
 }
 .itemTitle{
     font-size: 14px;

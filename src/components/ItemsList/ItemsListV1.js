@@ -4,7 +4,7 @@ import classes from './ItemsListV1.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryHeader from '../Navbar/CategoryHeader';
 import star from '../../Assets/star.svg'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 function valuetext(value) {
     return `${value}°C`;
@@ -147,12 +147,11 @@ const ItemsListV1 = () => {
 
                         {/* Item goes here /////////////// */}
                         {itemsList&&itemsList.products.map(e=><div key={e._id} className={classes.item}>
-                            <div className={classes.itemHolder}>
+                            <Link to={`/detail/${e.name}`} className={classes.itemHolder}>
                                 <div className={classes.itemImageholder}>
                                     <div className={classes.itemImage}>
                                             <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt=""/>
                                             
-                                        {console.log(`https://wsrv.nl/?url=${e.image[0]}`)}
                                     </div>
                                     
                                 </div>
@@ -175,7 +174,7 @@ const ItemsListV1 = () => {
                                         <span>₹{e.price}</span>
                                         <span>{Math.round((e.discountPrice/e.price)*100)}% off</span>
                                     </div>
-                            </div>
+                            </Link>
 
                         </div>)}
 

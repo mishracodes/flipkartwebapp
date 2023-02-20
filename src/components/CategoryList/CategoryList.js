@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import classes from './CategoryList.module.css'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 const CategoryList = (props) => {
 
   const categoryListStartRef = useRef()
@@ -11,89 +13,20 @@ const CategoryList = (props) => {
   const scrollIntoView = (ref) => {
     ref.current.scrollIntoView({ behavior: 'smooth' })
   }
+  const [itemsList, setitemsList] = useState()
+    const getCategories = async () => {
+        const result = await fetch(`http://localhost:4242/api/products/list/limitsubcategory/${props.subcategory}/10`);
+        const data = await result.json()
+        setitemsList(data)
+    }
+    useEffect(() => {
+        getCategories()
 
-  const categoryList = [
-    {
-      id: 1,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/ks7tuvk0/gimbal/v/z/7/0-43-om4-se-dji-original-imag5u6rgsdh6k4g.jpeg?q=70',
-      name: 'Top Deals of Camera Accessories',
-      priceR: 'Shop Now!',
-      category: 'Tripods, Gimbals, Bags..'
-    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    {
-      id: 2,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/printer/j/j/y/hp-laserjet-m1005-multifunction-original-imadxhzpeb9qbrfg.jpeg?q=70',
-      name: 'Printers',
-      priceR: 'From ₹3999',
-      category: 'HP'
-    },
-
-    {
-      id: 3,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/l5iid8w0/printer/l/z/7/-original-imagg6cmyt9yfvta.jpeg?q=70',
-      name: 'Printers',
-      priceR: 'From ₹2336',
-      category: 'Canon'
-    },
-
-    {
-      id: 4,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/kynb6vk0/monitor/1/n/s/lf22t354fhwxxl-full-hd-22-lf22t354fhwxxl-samsung-original-imagats2rjbg9uhv.jpeg?q=70',
-      name: 'Monitors',
-      priceR: 'From ₹9999',
-      category: 'SAMSUNG'
-    },
-
-    {
-      id: 5,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/l5jxt3k0/dslr-camera/m/n/a/-original-imagg7hsggshhwbz.jpeg?q=70',
-      name: 'Top Mirrorless Cameras',
-      priceR: 'Shop Now!',
-      category: 'Canon, Sony, Fujifilm...'
-    },
-
-    {
-      id: 6,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/kx50gi80/projector/r/9/p/zeb-pixa-play-12-5-6-dobly-audio-led-projector-zebronics-original-imag9z3yujqmzqt4.jpeg?q=70',
-      name: 'Projectors',
-      priceR: 'From ₹9999',
-      category: 'ZEBRONICS'
-    },
-
-    {
-      id: 7,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/kgsb1jk0/monitor/f/d/z/vg27aql1a-tuf-vg27aql1a-asus-original-imafwyeptd8ysndr.jpeg?q=70',
-      name: 'ASUS Monitors',
-      priceR: 'From ₹4999',
-      category: 'ASUS'
-    },
-    {
-      id: 8,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/l5iid8w0/printer/l/z/7/-original-imagg6cmyt9yfvta.jpeg?q=70',
-      name: 'Printers',
-      priceR: 'From ₹2336',
-      category: 'Canon'
-    },
-
-    {
-      id: 9,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/kynb6vk0/monitor/1/n/s/lf22t354fhwxxl-full-hd-22-lf22t354fhwxxl-samsung-original-imagats2rjbg9uhv.jpeg?q=70',
-      name: 'Monitors',
-      priceR: 'From ₹9999',
-      category: 'SAMSUNG'
-    },
-
-    {
-      id: 10,
-      imgSrc: 'https://rukminim1.flixcart.com/image/200/200/l5jxt3k0/dslr-camera/m/n/a/-original-imagg7hsggshhwbz.jpeg?q=70',
-      name: 'Top Mirrorless Cameras',
-      priceR: 'Shop Now!',
-      category: 'Canon, Sony, Fujifilm...'
-    },
-
-  ]
-
+  console.log('ietsmss', itemsList);
+  
   return (
     <div className={classes.main}>
       <div className={classes.categoryListContainer}>
@@ -101,25 +34,25 @@ const CategoryList = (props) => {
           <div className={classes.mainName}>
             <h4>{props.mainName}</h4>
             <div className={classes.viewAll}>
-              <a className={classes.viewAllUrl} href="https://www.flipkart.com/offers-list/content?screen=dynamic&amp;pk=themeViews%3DDT-OMU-1%3ADealcard~widgetType%3DdealCard~contentType%3Dneo&amp;wid=2.dealCard.OMU&amp;wid=3.dealCard.OMU_3&amp;otracker=hp_omu_Best%2Bof%2BElectronics_3&amp;otracker1=hp_omu_PINNED_neo%2Fmerchandising_Best%2Bof%2BElectronics_NA_wc_view-all_3">VIEW ALL</a>
+              <Link className={classes.viewAllUrl} to={`/items/${props.subcategory}`}>VIEW ALL</Link>
             </div>
           </div>
         </div>
         <div className={classes.categoryList} >
           <div className={classes.categoryListChild}>
             <p ref={categoryListStartRef}></p>
-            {categoryList.map((e) => {
+            {itemsList&&itemsList.products.map((e) => {
               return (<div key={e.id} className={classes.category}>
-                <a href="/" className={classes.categoryUrl}>
+                <Link to={`/detail/${e.name}`} className={classes.categoryUrl}>
                   <div className={classes.categoryImage}>
                     <div className={classes.categoryImgContainer}>
-                      <img src={e.imgSrc} alt="" />
+                      <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt="" />
                     </div>
                   </div>
                   <div className={classes.itemName}>{e.name}</div>
-                  <div className={classes.priceRange}>{e.priceR}</div>
-                  <div className={classes.itemCategory}>{e.category}</div>
-                </a>
+                  <div className={classes.priceRange}>{e.discountPrice}</div>
+                  <div className={classes.itemCategory}>{e.subcategory}</div>
+                </Link>
               </div>)
             })}
             <p ref={categoryListEndRef}></p>
@@ -143,16 +76,16 @@ const CategoryList = (props) => {
         </div>
         <div className={classes.smlistItems}>
           <div  className={classes.itemOne}>
-        {categoryList.map((e) => {
-            return(<div key={e.id} className={classes.smItemCard}>
+        {itemsList&&itemsList.products.map((e) => {
+            return(<Link to={`/detail/${e.name}`} key={e.id} className={classes.smItemCard}>
                 <div className={classes.smItemImg}>
                   <div className={classes.smItemImgContainer}>
-                    <img src={e.imgSrc} alt=''/>
+                    <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt=''/>
                   </div>
                 </div>
-                <p>{e.category}</p>
+                <p>{e.subcategory}</p>
                 <h4>{e.name}</h4>
-              </div>
+              </Link>
 
            )
             })}

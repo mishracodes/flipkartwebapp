@@ -180,6 +180,28 @@ router.get("/list/subcategory/:subcategory/:page", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 })
+
+
+//ROUTE:1=6 Fetch all Products: GET "/api/products/list/subcategory/:subcategory". Login NOT required
+router.get("/list/limitsubcategory/:subcategory/:limit", async (req, res) => {
+  const findsubcategory=req.params.subcategory.slice(0,1).toUpperCase()+req.params.subcategory.slice(1)
+  let limit=req.params.limit
+  try {
+    // const products_total = await Products.find({})
+    const products = await Products.find({ subcategory: findsubcategory})
+                                   .limit( limit );
+    res.json({products})
+    // res.json(
+    //     {"page":pageNumber,
+    //       results:products,
+    //       "total_results": 19996,
+    //       "total_pages": Math.round(19996/20)
+    //     });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+})
 ///////////////////////////////////////////////Products ends here/////////////////////////////
 
 

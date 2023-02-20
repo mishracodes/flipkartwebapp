@@ -13,6 +13,27 @@
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 }
+
+  /* xl */
+  @media (max-width: 1280px) {
+    .subcatcardcontainer {
+        grid-template-columns: 33% 33% 33%;
+    }
+  }
+
+   /* lg */
+   @media (max-width: 1024px) {
+    .subcatcardcontainer {
+        grid-template-columns: 50% 50%;
+    }
+  }
+
+   /* md */
+   @media (max-width: 768px) {
+    .subcatcardcontainer {
+        grid-template-columns: 100%;
+    }
+  }
 .subcatcard{
     text-decoration: none;
     cursor: pointer;
