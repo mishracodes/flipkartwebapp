@@ -26,6 +26,8 @@
   width: 64px;
   height: 64px;
   padding: 5px;
+  object-fit: contain;
+  cursor: pointer;
 }
 .itemMainImage{
   position: relative;

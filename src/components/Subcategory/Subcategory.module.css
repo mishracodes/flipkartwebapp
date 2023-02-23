@@ -72,5 +72,14 @@
     color: #212121;
 }
 
-
- 
+.spinnerCenter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.noItems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}

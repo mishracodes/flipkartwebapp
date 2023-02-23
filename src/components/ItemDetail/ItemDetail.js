@@ -4,37 +4,53 @@ import classes from './ItemDetail.module.css'
 import star from '../../Assets/star.svg'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 const ItemDetail = () => {
+  const {_id} = useLocation().state;
   const [cords, setcords] = useState({x:0,y:0})
   const [cordshover, setcordshover] = useState({x:0,y:0})
   const [modelOpacity, setmodelOpacity] = useState(0)
+  const [itemDetails, setitemDetails] = useState(0)
+  const [currentMainImage, setcurrentMainImage] = useState(0)
 
+  const onThumbHoverHandler =(event)=>{
+    setcurrentMainImage(event.target.src)
+    
+  }
   const getCoords=(event)=>{
    
     setcords({x: 1.18*event.clientX-280,y:-300 + 2.1*event.clientY})
     setcordshover({x: event.clientX-250,y:-160 + event.clientY})
   
   }
+
+  const getItemDetails=async(_id)=>{
+    
+    const result=await fetch(`https://shipprkart.onrender.com/api/products/details/${_id}`)
+    const data=await result.json()
+    setitemDetails(data.product)
+    setcurrentMainImage(data.product.image[0])
+  }
+  useEffect(()=>{
+    getItemDetails(_id);
+  },[_id])
+  
   return (
     <div>
       <CategoryHeader />
-      <div className={classes.main}>
+      {itemDetails&&<div className={classes.main}>
         <div className={classes.detailContainer}>
 
           <div className={classes.itemDetails}>
             <div className={classes.itemImages}>
               <div className={classes.itemThumbs}>
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/r/h/8/-original-imagma3fudxcqmrw.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/h/p/u/-original-imagma3fhx9dcayv.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/5/d/5/1-78-bsw086-android-ios-fire-boltt-yes-original-imagm82x4bawgvpe.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/5/d/5/1-78-bsw086-android-ios-fire-boltt-yes-original-imagm82x4bawgvpe.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/5/d/5/1-78-bsw086-android-ios-fire-boltt-yes-original-imagm82x4bawgvpe.jpeg?q=70" alt="" />
-                <img src="https://rukminim1.flixcart.com/image/128/128/xif0q/smartwatch/5/d/5/1-78-bsw086-android-ios-fire-boltt-yes-original-imagm82x4bawgvpe.jpeg?q=70" alt="" />
+                {itemDetails.image.map(e=><img key={e} src={`https://wsrv.nl/?url=${e}`} alt="" onMouseOver={onThumbHoverHandler}/>)}
+                
               </div>
               <div className={classes.itemMainImage}>
               <div style={{transform: `translate3d(${cordshover.x}px, ${cordshover.y}px, 0px)`, opacity:`${modelOpacity}`}} className={classes.pointerHover}></div>
-                <img src='https://rukminim1.flixcart.com/image/416/416/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=70' alt='' onMouseOver={()=>{setmodelOpacity(1)}} onMouseOut={()=>{setmodelOpacity(0)}} onMouseMove={getCoords}/>
+                <img src={`https://wsrv.nl/?url=${currentMainImage}`} alt='' onMouseOver={()=>{setmodelOpacity(1)}} onMouseOut={()=>{setmodelOpacity(0)}} onMouseMove={getCoords}/>
                 <div className={classes.addCartButton}>
                   <div><ShoppingCartIcon/> ADD TO CART</div>
                   <div><FlashOnIcon/> BUY NOW</div>
@@ -44,24 +60,24 @@ const ItemDetail = () => {
             </div>
             <div className={classes.itemDescription}>
               <div className={classes.modelbox} style={{opacity:`${modelOpacity}`}}>
-                <img style={{transform: `translate3d(-${cords.x}px, ${-cords.y}px, 0px)`, width:'1200px'}} src="https://rukminim1.flixcart.com/image/1664/1664/xif0q/smartwatch/y/9/k/-original-imagma3fhdjhjnq8.jpeg?q=90" alt=''/>
+                <img style={{transform: `translate3d(-${cords.x}px, ${-cords.y}px, 0px)`, width:'1200px'}} src={`https://wsrv.nl/?url=${currentMainImage}`} alt=''/>
               </div>
               <div className={classes.pagenation}>Home &nbsp; &gt; &nbsp; Wearable Smart Devices &nbsp; &gt; &nbsp; Smart Watches &nbsp; &gt; &nbsp; Fire-Boltt Smart Watches &nbsp; &gt; &nbsp;
                 Fire-Boltt Cobra 1.78...</div>
               <div className={classes.itemTitle}>
-                Fire-Boltt Cobra 1.78" AMOLED Army Grade Build, Bluetooth Calling with 123 Sports Modes. Smartwatch  (Black Strap, Free Size)
+                {itemDetails.name}
               </div>
               <div className={classes.starRating}>
                 <span className={classes.starIcon}>
-                  <div>4.3<img src={star} alt="" /></div>
+                  <div>{itemDetails.rate}<img src={star} alt="" /></div>
                 </span>
-                <span className={classes.rating}>1,702 Ratings & 603 Reviews</span>
-                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" width={77} alt='' />
+                <span className={classes.rating}>{itemDetails.count} Ratings & {itemDetails.count} Reviews</span>
+                {itemDetails.fAssured&&<img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" width={77} alt='' />}
               </div>
               <div className={classes.itemPrice}>
-                <span>₹4,299</span>
-                <span>₹19,999</span>
-                <span>78% off</span>
+                <span>₹{itemDetails.discountPrice}</span>
+                <span>₹{itemDetails.price}</span>
+                <span>{Math.round(((itemDetails.price-itemDetails.discountPrice)/itemDetails.price)*100)}% off</span>
               </div>
 
               <div className={classes.itemOffers}>
@@ -116,7 +132,7 @@ const ItemDetail = () => {
               <div className={classes.itemInfo}>
                 <h2>Description</h2>
                 <div>
-                  <p>You can keep an eye on all the essential updates, notifications, and messages on your wrist with the help of the Fire-Boltt Cobra Smartwatch. Boasting an inbuilt dial pad, contact synchronisation, and call history features, this smartwatch makes it simple to make and receive calls. And, its inbuilt speaker and microphone ensure HD calling. Besides, thanks to its up to 4.521 cm (1.78) display and up to 368x448p high resolution, this smartwatch offers sharp, clear visuals. Moreover, the always-on display function in this smartwatch allows you to alternate between analogue and digital modes as necessary.</p>
+                  <p>{itemDetails.description}.</p>
                   
                 </div>
 
@@ -128,7 +144,7 @@ const ItemDetail = () => {
 
 
         </div>
-      </div>
+      </div>}
 
     </div>
   )

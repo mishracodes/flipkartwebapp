@@ -36,7 +36,19 @@ router.get("/list/:page", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+//ROUTE:1.1 Fetch perticular Products: GET "/api/products/list". Login NOT required
+router.get("/details/:id", async (req, res) => {
 
+  try {
+     //find the product to  edit and update it 
+     let product = await Products.findById(req.params.id);
+     if (!product) return res.status(404).send("Not Found")
+    res.json({product});
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 //ROUTE:2 Set Product: POST "/api/product/setproduct". Login required 
 // router.post('/admsetproduct',fetchuser, async(req,res)=>{
@@ -168,7 +180,12 @@ router.get("/list/subcategory/:subcategory/:page", async (req, res) => {
     const products = await Products.find({ subcategory: findsubcategory})
                                    .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 )
                                    .limit( nPerPage );
-    res.json({products})
+    const docCount=await Products.find({ subcategory: findsubcategory}).countDocuments({})
+    res.json(  {"page":pageNumber,
+    results:products,
+    "total_results": docCount,
+    "total_pages": Math.round(docCount/20)
+  })
     // res.json(
     //     {"page":pageNumber,
     //       results:products,

@@ -5,6 +5,13 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+const imageLoadError=(source)=>{
+  source.target.src = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
+      source.onerror = "";
+      return true;
+}
+
 const CategoryList = (props) => {
 
   const categoryListStartRef = useRef()
@@ -13,9 +20,12 @@ const CategoryList = (props) => {
   const scrollIntoView = (ref) => {
     ref.current.scrollIntoView({ behavior: 'smooth' })
   }
+
+
+
   const [itemsList, setitemsList] = useState()
     const getCategories = async () => {
-        const result = await fetch(`http://localhost:4242/api/products/list/limitsubcategory/${props.subcategory}/10`);
+        const result = await fetch(`https://shipprkart.onrender.com/api/products/list/limitsubcategory/${props.subcategory}/10`);
         const data = await result.json()
         setitemsList(data)
     }
@@ -25,7 +35,6 @@ const CategoryList = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-  console.log('ietsmss', itemsList);
   
   return (
     <div className={classes.main}>
@@ -42,8 +51,8 @@ const CategoryList = (props) => {
           <div className={classes.categoryListChild}>
             <p ref={categoryListStartRef}></p>
             {itemsList&&itemsList.products.map((e) => {
-              return (<div key={e.id} className={classes.category}>
-                <Link to={`/detail/${e.name}`} className={classes.categoryUrl}>
+              return (<div key={e._id} className={classes.category}>
+                <Link to={`/detail/${e.name}`} className={classes.categoryUrl} state={{_id: e._id}}>
                   <div className={classes.categoryImage}>
                     <div className={classes.categoryImgContainer}>
                       <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt="" />
@@ -77,10 +86,10 @@ const CategoryList = (props) => {
         <div className={classes.smlistItems}>
           <div  className={classes.itemOne}>
         {itemsList&&itemsList.products.map((e) => {
-            return(<Link to={`/detail/${e.name}`} key={e.id} className={classes.smItemCard}>
+            return(<Link to={`/detail/${e.name}`} key={e._id} className={classes.smItemCard} state={{_id: e._id}}>
                 <div className={classes.smItemImg}>
                   <div className={classes.smItemImgContainer}>
-                    <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt=''/>
+                    <img onError={imageLoadError} src={`https://wsrv.nl/?url=${e.image[0]}`} alt=''/>
                   </div>
                 </div>
                 <p>{e.subcategory}</p>

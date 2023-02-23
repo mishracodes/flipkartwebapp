@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CategoryHeader from '../Navbar/CategoryHeader';
+import Spinner from '../UI/Spinner';
 import classes from './Subcategory.module.css'
 const Subcategory = () => {
     const params = useParams();
@@ -24,7 +25,7 @@ const Subcategory = () => {
                 <div className={classes.header}>
                     <h2>{id}</h2>
                 </div>
-
+                {!subcategories && <div className={classes.spinnerCenter}><Spinner/></div>}
                 <div className={classes.subcatcardcontainer}>
                     {subcategories && subcategories.map(e => <Link to={`/items/${e.name}`} key={e._id} className={classes.subcatcard}>
                         <div className={classes.cardImage}>
@@ -36,7 +37,9 @@ const Subcategory = () => {
                         <p>{e.name}</p>
                     </Link>
                     )}
+                    
                 </div>
+                {subcategories&&subcategories.length===0&&<div className={classes.noItems}>No Items Found</div>}
             </div>
 
         </div>

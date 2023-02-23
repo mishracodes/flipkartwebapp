@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Slider, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Pagination, Slider, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import classes from './ItemsListV1.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -10,16 +10,33 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
+const imageLoadError=(source)=>{
+    source.target.src = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
+        source.onerror = "";
+        return true;
+}
+
 const ItemsListV1 = () => {
 
     const [value, setValue] = useState([0, 20001]);
-
+    const {id}=useParams();
+    const [itemsList, setitemsList] = useState()
+    const [currentPage, setcurrentPage] = useState(1)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const {id}=useParams();
-    const [itemsList, setitemsList] = useState()
+    const getitemsListForPage= async(page)=>{
+        const result = await fetch(`https://shipprkart.onrender.com/api/products/list/subcategory/${id}/${page}`);
+        const data = await result.json()
+        setitemsList(data)
+    }
+   const  pageChangeHandler=(event, pageNumber = 1)=> {
+        // Your code
+        setcurrentPage(pageNumber)
+        getitemsListForPage(pageNumber)
+        
+    }
+   
     const getitemsList= async () => {
         const result = await fetch(`https://shipprkart.onrender.com/api/products/list/subcategory/${id}/1`);
         const data = await result.json()
@@ -130,7 +147,7 @@ const ItemsListV1 = () => {
                     </div>
                     <div className={classes.mainBar__title}>
                         <h2>Wearable Devices</h2>
-                        <p>(Showing 1 – 40 products of 53,848 products)</p>
+                        <p>(Showing {(currentPage-1)*20} – {currentPage*20} products of {itemsList&&itemsList.total_results} products)</p>
                     </div>
                     <div className={classes.mainBar__shortBy}>
                         <h2>Short By</h2>
@@ -138,7 +155,7 @@ const ItemsListV1 = () => {
                         <p>Price--Low to High</p>
                         <p>Price--High to Low</p>
                     </div>
-                    <div className={classes.itemsContainer}>
+                    <div className={`${classes.itemsContainer} row`}>
 
 
 
@@ -146,23 +163,27 @@ const ItemsListV1 = () => {
 
 
                         {/* Item goes here /////////////// */}
-                        {itemsList&&itemsList.products.map(e=><div key={e._id} className={classes.item}>
-                            <Link to={`/detail/${e.name}`} className={classes.itemHolder}>
+                        {itemsList&&itemsList.results.map(e=><div key={e._id} className={`${classes.item} col-md-3`}>
+                            <div className={classes.itemHolder}>
+                                <Link to={`/detail/${e.name}`} style={{textDecoration:'none'}} state={{_id: e._id}}>
                                 <div className={classes.itemImageholder}>
                                     <div className={classes.itemImage}>
-                                            <img src={`https://wsrv.nl/?url=${e.image[0]}`} alt=""/>
+                                            <img onError={imageLoadError} src={`https://wsrv.nl/?url=${e.image[0]}`} alt=""/>
                                             
                                     </div>
                                     
                                 </div>
+                                </Link>
                                 <div  className={classes.markFavourite}>
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span></div>
-                                <div className={classes.itemTitle}>
-                                {e.name}
-                                </div>
-                                <div className={classes.itemDesc}>
-                                    {e.brand}
-                                </div>
+                                    <span><svg xmlns="http://www.w3.org/2000/svg" className="_1l0elc" width="22" height="22" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#c2c2c2" className="eX72wL" stroke="#FFF" fillRule="evenodd" opacity=".9"></path></svg></span></div>
+                                <Link to={`/detail/${e.name}`} style={{textDecoration:'none'}}>
+                                    <div className={classes.itemTitle}>
+                                    {e.name}
+                                    </div>
+                                    <div className={classes.itemDesc}>
+                                        {e.brand}
+                                    </div>
+                                </Link>
                                 <div className={classes.starRating}>
                                         <span className={classes.starIcon}>
                                             <div>{e.rate}<img src={star} alt="" /></div>
@@ -172,18 +193,25 @@ const ItemsListV1 = () => {
                                     <div className={classes.itemPrice}>
                                         <span>₹{e.discountPrice}</span>
                                         <span>₹{e.price}</span>
-                                        <span>{Math.round((e.discountPrice/e.price)*100)}% off</span>
+                                        <span>{Math.round(((e.price-e.discountPrice)/e.price)*100)}% off</span>
                                     </div>
-                            </Link>
+                            </div>
 
                         </div>)}
 
-                        
+                       
 
 
                         
 
                     </div>
+
+                    {/* ///pagenation */}
+                    <Stack spacing={2} className={classes.pagination}>
+                        <Pagination onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} count={itemsList&&itemsList.total_pages} color="primary" />
+                    </Stack>
+
+
                 </div>
             </div>
         </>
