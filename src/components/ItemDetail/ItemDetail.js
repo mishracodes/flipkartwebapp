@@ -93,7 +93,7 @@ const ItemDetail = () => {
                 <h2>Delivery</h2>
                 <div>
                   <p>560066</p>
-                  <p>Delivery in2 Days, Saturday</p>
+                  <p>Delivery in 2 Days, Saturday</p>
                   <span>if ordered before 8:40 PM</span>
                 </div>
 

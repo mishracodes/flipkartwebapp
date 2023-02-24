@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
   column-gap: 20px;
   height: 56px;
   width: 100%;
@@ -17,8 +18,16 @@
   margin-left: 15px;
 
 }
+.nav__main form{
+  display: flex;
+  flex-grow: 1;
+  max-width: 564px;
+
+}
 .nav__main  input {
-  width: 564px;
+  max-width: 564px;
+  flex-grow: 1;
+  flex-shrink: 1;
   height: 35px;
   margin-right: 20px;
   border-radius: 2px;

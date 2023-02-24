@@ -4,7 +4,7 @@ import classes from './ItemsListV1.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryHeader from '../Navbar/CategoryHeader';
 import star from '../../Assets/star.svg'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 function valuetext(value) {
     return `${value}°C`;
@@ -22,9 +22,16 @@ const ItemsListV1 = () => {
     const {id}=useParams();
     const [itemsList, setitemsList] = useState()
     const [currentPage, setcurrentPage] = useState(1)
+    const location =useLocation();
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const searchitemsListForPage= async(page)=>{
+        const result = await fetch(`https://shipprkart.onrender.com/api/searchproducts/${location.state.url}/${page}`);
+        const data = await result.json()
+        setitemsList(data)
+    }
     const getitemsListForPage= async(page)=>{
         const result = await fetch(`https://shipprkart.onrender.com/api/products/list/subcategory/${id}/${page}`);
         const data = await result.json()
@@ -33,7 +40,10 @@ const ItemsListV1 = () => {
    const  pageChangeHandler=(event, pageNumber = 1)=> {
         // Your code
         setcurrentPage(pageNumber)
+        if(location.state===null)
         getitemsListForPage(pageNumber)
+        else
+        searchitemsListForPage(pageNumber)
         
     }
    
@@ -42,11 +52,22 @@ const ItemsListV1 = () => {
         const data = await result.json()
         setitemsList(data)
     }
+    const getSearchList= async (url) => {
+        const result = await fetch(`https://shipprkart.onrender.com/api/searchproducts/${url}/1`);
+        const data = await result.json()
+        setitemsList(data)
+    }
     useEffect(() => {
+        
+        
+        if(location.state===null)
         getitemsList()
+        else
+        getSearchList(location.state.url)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-// console.log('itemslist',itemsList);
+    }, [id,location.state])
+console.log('itm',itemsList);
 
     return (
         <>
@@ -59,14 +80,8 @@ const ItemsListV1 = () => {
                         Filters
                     </div>
                     <div className={classes.categories}>
-                        <h2>Categories</h2>
-                        <p>&lt; Wearable Devices</p>
-                        <ul>
-                            <li>Smart Watches</li>
-                            <li>Smart Bands</li>
-                            <li>Smart Headphones</li>
-                            <li>Smart Glasses</li>
-                        </ul>
+                        <h2>Category</h2>
+                        <p>&lt; {id}</p>
                     </div>
                     <div className={classes.price}>
                         <h2>Price</h2>
