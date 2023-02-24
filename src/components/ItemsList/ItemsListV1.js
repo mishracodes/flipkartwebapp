@@ -6,6 +6,7 @@ import CategoryHeader from '../Navbar/CategoryHeader';
 import star from '../../Assets/star.svg'
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import Spinner from '../UI/Spinner';
 function valuetext(value) {
     return `${value}°C`;
 }
@@ -67,7 +68,6 @@ const ItemsListV1 = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id,location.state])
-console.log('itm',itemsList);
 
     return (
         <>
@@ -217,14 +217,18 @@ console.log('itm',itemsList);
                        
 
 
+                {itemsList&&itemsList.results.length===0&&<div className={classes.noItems}>No Items Found</div>}
+                {!itemsList && <div className={classes.spinnerCenter}><Spinner/></div>}
                         
 
                     </div>
 
                     {/* ///pagenation */}
-                    <Stack spacing={2} className={classes.pagination}>
+                    {itemsList&&itemsList.total_pages!==0&&<Stack spacing={2} className={classes.pagination}>
                         <Pagination onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} count={itemsList&&itemsList.total_pages} color="primary" />
-                    </Stack>
+                    </Stack>}
+
+                    
 
 
                 </div>
