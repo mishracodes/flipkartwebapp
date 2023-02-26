@@ -178,7 +178,7 @@ const ItemsListV1 = () => {
 
 
                         {/* Item goes here /////////////// */}
-                        {itemsList&&itemsList.results.map(e=><div key={e._id} className={`${classes.item} col-md-3`}>
+                        {itemsList&&itemsList.results.map(e=><div key={e._id} className={`${classes.item} col-xl-3 col-lg-4 col-md-6 col-sm-12`}>
                             <div className={classes.itemHolder}>
                                 <Link to={`/detail/${e.name}`} style={{textDecoration:'none'}} state={{_id: e._id}}>
                                 <div className={classes.itemImageholder}>

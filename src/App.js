@@ -8,10 +8,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ItemsListV2 from './components/ItemsList/ItemsListV2'
 import ItemDetail from './components/ItemDetail/ItemDetail'
 import Subcategory from './components/Subcategory/Subcategory'
+import Modalbox from './components/UI/Modalbox'
  
 const App = () => {
   return (
     <BrowserRouter>
+    <Modalbox message="Hi User this website is using api deployed on render.com free tier so the 1st response from the site might take some time. Hence you may find the products loading slow for the first time. Subsequent requests might not take that much time. Sorry for inconvience."/>
       <Header/>
       
         <Routes>

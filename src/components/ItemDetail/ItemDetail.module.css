@@ -14,9 +14,21 @@
   display: flex;
   position: sticky;
   top: 64px;
-  bottom: 0;
 
   align-self: flex-start;
+}
+/* lg */ 
+@media (max-width: 1024px) {
+  .itemDetails {
+      flex-direction: column;
+    
+  }
+  .itemImages{
+    position: relative;
+    top: 0;
+    justify-content: center;
+align-self: center;
+  }
 }
 .itemThumbs {
   display: flex;
@@ -40,6 +52,7 @@
   margin: 20px;
   cursor: crosshair;
 }
+
 .addCartButton {
   display: flex;
   font-size: 16px;
@@ -76,6 +89,32 @@
   border-radius: 2px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
   width: 48%;
+}
+@media (max-width: 768px) {
+  .addCartButton{
+    display: none;
+  }
+  .itemImages{
+    flex-direction: column-reverse;
+  }
+  .itemMainImage>img{
+    width: 90%;
+    height: 300px;
+  cursor: pointer;
+
+  }
+  .itemThumbs{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .modelbox{
+    display: none;
+  }
+  .pointerHover{
+    display: none;
+  }
 }
 .itemDescription {
   padding: 0 16px;
@@ -228,4 +267,39 @@
   position: absolute;
   background: url('../../Assets/cursorhoverbg.svg') repeat;
   z-index: 4;
+}
+.specsContainer{
+  margin: 24px 0;
+  border: 1px solid #f0f0f0;
+}
+.specsHeader{
+  padding: 24px;
+  font-size: 24px;
+  font-weight: 500;
+    line-height: 1.14;
+    color: #212121;
+}
+.specsDetails{
+  border-top: 1px solid #f0f0f0;
+  padding: 24px;
+  font-size: 14px;
+}
+.specsItem{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.specsTitle{
+  color: #878787;
+  width: 35%;
+}
+.specsDesc{
+  width: 75%;
+  color: #212121;
+}
+.spinnerCenter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

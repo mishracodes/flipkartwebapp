@@ -39,25 +39,25 @@
 }
 
 .nav__main p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
   font-weight: 600;
   cursor: pointer;
 }
 
 .nav__cart{
-  display: flex;
-  align-items: center;
+  position: relative;
   margin-right: 15px;
 }
 .nav__item__more{
-  display: flex;
-  align-items: center;
+  margin: 0;
 }
 .nav__item__more:hover .nav__item__expandmore{
   transform: rotate(180deg);
 }
 .nav__item__username{
-  display: flex;
-  align-items: center;
   white-space: nowrap;
 }
 .nav__item__username:hover .nav__item__expandmore_user{
@@ -66,4 +66,20 @@
 }
 .nav_main_logo{
   cursor: pointer;
+}
+.cartBadge{
+  position: absolute;
+  font-size: 12px;
+  top: -10px;
+  left: 5px;
+  font-weight: 400;
+  border-radius: 5px;
+  color: white;
+  background-color: #ff6161;
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

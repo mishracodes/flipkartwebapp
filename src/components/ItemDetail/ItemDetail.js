@@ -6,6 +6,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import rsymbol from '../../Assets/rsymbol.svg'
+import Spinner from '../UI/Spinner';
 const ItemDetail = () => {
   const {_id} = useLocation().state;
   const [cords, setcords] = useState({x:0,y:0})
@@ -35,17 +37,20 @@ const ItemDetail = () => {
   useEffect(()=>{
     getItemDetails(_id);
   },[_id])
-  
+
+
   return (
     <div>
       <CategoryHeader />
+      {!itemDetails && <div className={classes.spinnerCenter}><Spinner/></div>}
+
       {itemDetails&&<div className={classes.main}>
         <div className={classes.detailContainer}>
 
           <div className={classes.itemDetails}>
             <div className={classes.itemImages}>
               <div className={classes.itemThumbs}>
-                {itemDetails.image.map(e=><img key={e} src={`https://wsrv.nl/?url=${e}`} alt="" onMouseOver={onThumbHoverHandler}/>)}
+                {itemDetails.image.map((e,i)=><img key={i} src={`https://wsrv.nl/?url=${e}`} alt="" onMouseOver={onThumbHoverHandler}/>)}
                 
               </div>
               <div className={classes.itemMainImage}>
@@ -103,15 +108,9 @@ const ItemDetail = () => {
                 <h2>Highlights</h2>
                 <div>
                   <ul>
-                    <li>Large AMOLED Display : 1.78 inch screen with High Resolution of 368 x 448 Pixels. | Army Grade Build for very sturdy and rugged use with Camouflage colours</li>
-                    <li>The first Fire-Boltt Smartwatch designed for the most challenging outdoor conditions. The watch has passed 15 military-grade toughness tests, including resistance to extreme heat, cold, humidity, and more</li>
-                    <li>Supports Bluetooth Calling : Make seamless calls through the watch with bluetooth calling function with InBuilt Voice Assistance</li>
-                    <li>It is Anti-Impact, Anti-Fluid Corrosion. The bottom and the bezel of Fire-Boltt COBRA is made of high strength-metal.</li>
-                    <li>123 Sports Modes - Intelligent Sports Algorithm to track down the minutest of the details of your workout sessions. Monitor your Health, track Heart Rate, SpO2 on the go.</li>
-                    <li>With Call Function</li>
-                    <li>Touchscreen</li>
-                    <li>Fitness & Outdoor</li>
-                    <li>Battery Runtime: Upto 5 days</li>
+                    <li>Services :  <img src={rsymbol} height='16px' width='16px' alt=''/>  Cash on Delivery available</li>
+                    <li>EMI starting from ₹{Math.round(itemDetails.discountPrice*0.1)}/month</li>
+                    <li>Net banking & Credit/ Debit/ ATM card</li>
                   </ul>
                 </div>
 
@@ -136,6 +135,21 @@ const ItemDetail = () => {
                   
                 </div>
 
+              </div>
+              <div className={classes.specsContainer}>
+                <div className={classes.specsHeader}>Specifications</div>
+                <div className={classes.specsDetails}>
+
+
+                
+
+                  {itemDetails?.specifications&&Object.keys(itemDetails?.specifications).map(e=><div key={'e'} className={classes.specsItem}>
+                    <div className={classes.specsTitle}>{e}</div>
+                    <div className={classes.specsDesc}>{itemDetails.specifications[e]}</div>
+                  </div>)}
+                  
+                </div>
+              
               </div>
 
             </div>

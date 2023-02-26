@@ -80,7 +80,7 @@ const CategoryList = (props) => {
       <div className={classes.categoryListContainerSm}>
         <div className={classes.smlistHead}>
           <h4>{props.mainName}</h4>
-          <div className={classes.smlistViewAll}><a href="https://www.flipkart.com/offers-list/content?screen=dynamic&amp;pk=themeViews%3DDT-OMU-1%3ADealcard~widgetType%3DdealCard~contentType%3Dneo&amp;wid=2.dealCard.OMU&amp;wid=3.dealCard.OMU_3&amp;otracker=hp_omu_Best%2Bof%2BElectronics_3&amp;otracker1=hp_omu_PINNED_neo%2Fmerchandising_Best%2Bof%2BElectronics_NA_wc_view-all_3">View all</a></div>
+          <div className={classes.smlistViewAll}><Link  to={`/items/${props.subcategory}`}>View all</Link></div>
           
         </div>
         <div className={classes.smlistItems}>
