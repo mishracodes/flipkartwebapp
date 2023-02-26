@@ -50,7 +50,7 @@ const ItemDetail = () => {
 
       {itemDetails && <div className={classes.main}>
         <div className={classes.smAddCartButton}>
-          <div onClick={() => { dispatch(cartActions.addToCart({ id: itemDetails._id, price: itemDetails.discountPrice, name: itemDetails.name })) }}><ShoppingCartIcon /> ADD TO CART</div>
+          <div onClick={() => { dispatch(cartActions.addToCart({ id: itemDetails._id, price: itemDetails.discountPrice, name: itemDetails.name, brand: itemDetails.brand, image:itemDetails.image[0], originalPrice: itemDetails.price, perOff: Math.round(((itemDetails.price - itemDetails.discountPrice) / itemDetails.price) * 100) })) }}><ShoppingCartIcon /> ADD TO CART</div>
           <div><FlashOnIcon /> BUY NOW</div>
         </div>
         <div className={classes.detailContainer}>
