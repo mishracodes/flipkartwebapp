@@ -242,6 +242,7 @@ align-self: center;
 }
 .promoBanner {
   margin: 12px 0;
+  width: 60%;
 }
 .modelbox {
   position: absolute;

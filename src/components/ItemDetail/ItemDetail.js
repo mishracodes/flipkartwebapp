@@ -125,7 +125,7 @@ const ItemDetail = () => {
 
               </div>
 
-              <img className={classes.promoBanner} src="https://rukminim1.flixcart.com/lockin/400/400/images/promotion_banner_v2_active.png?q=50" alt='' width='380px'/>
+              <img className={classes.promoBanner} src="https://rukminim1.flixcart.com/lockin/400/400/images/promotion_banner_v2_active.png?q=50" alt=''/>
 
 
               <div className={classes.itemInfo}>
