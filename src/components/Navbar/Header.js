@@ -17,7 +17,7 @@ const Header = () => {
   const inputHandler=(event)=>{
     setInputText(event.target.value)
   }
-  const items=useSelector(state=>state.cart.items)
+  const cart=useSelector(state=>state.cart)
   return (
     <div className={classes.nav__main}>
         <Link to='/'><img src={logo} alt="logo" className={classes.nav_main_logo}/></Link>
@@ -25,7 +25,7 @@ const Header = () => {
         <p className={classes.nav__item__username}>Amit Mishra <ExpandMoreIcon className={classes.nav__item__expandmore_user} sx={{fontSize:"17px"}}/></p>
         <p className='xlHidden'>Become a Seller</p>
         <p className={`${classes.nav__item__more} lgHidden`}>More <ExpandMoreIcon className={classes.nav__item__expandmore} sx={{fontSize:"17px"}}/></p>
-        <p className={classes.nav__cart}> <ShoppingCartIcon /> <span className='smHidden'>Cart</span> <span className={classes.cartBadge}>{items.length}</span></p>
+        <p className={classes.nav__cart}><Link to='/cart' className={classes.cartLink}> <ShoppingCartIcon /> <span className='smHidden'>Cart</span> <span className={classes.cartBadge}>{cart.totalQuantity}</span></Link></p>
     </div>
   )
 }

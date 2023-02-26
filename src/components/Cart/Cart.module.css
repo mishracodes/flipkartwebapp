@@ -1,0 +1,221 @@
+.main {
+    background-color: #f1f3f6;
+    margin-top: 56px;
+  }
+  .cartContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    padding: 16px;
+  }
+ 
+  .leftBar{
+    width: 65%;
+  }
+  .rightSidebar{
+    width: 30%;
+
+  }
+  @media (max-width: 1020px) {
+    .cartContainer {
+        flex-direction: column;
+    }
+    .leftBar{
+        width: 100%;
+    }
+    .rightSidebar{
+        width: 100%;
+    
+      }
+  .cartContainer {
+    width: 95%;
+  }
+  }
+.deliverTo{
+    font-size: 14px;
+    padding: 12px 16px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+}
+.deliveryName{
+    color: #111112;
+    line-height: 20px;
+}
+.deliveryName>span{
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+.deliveryAddress{
+    color: #717478;
+    line-height: 20px;
+    margin: 4px 0;
+}
+
+.priceDetails{
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
+
+}
+.priceHeader{
+    padding: 13px 24px;
+    color: #878787;
+}
+.priceDesc{
+    padding: 0 24px 0 24px;
+  border-top: 1px solid #f0f0f0;
+
+}
+.priceDesc>p{
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    color: #212121;
+    line-height: 1.4;
+}
+.greenText{
+    color: #388e3c;
+}
+.priceTotal{
+    border-top: 1px dashed #e0e0e0;
+    font-weight: 500;
+    font-size: 18px;
+    color: #212121;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 24px;
+    border-bottom: 1px dashed #e0e0e0;
+
+}
+.priceSave{
+    color: #388e3c;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px 24px;
+
+}
+.safeSecure{
+    color: #878787;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+}
+.safeSecure>p{
+    margin: 0 0 0 5px;
+}
+.cartItemsContainer{
+    background-color: #fff;
+    box-shadow: 0 0 2px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.cartItem{
+    display: flex;
+    padding: 24px;
+    border-bottom: 1px solid #e0e0e0;
+
+}
+.cartItemImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+}
+.cartItemImage>img{
+  height: 100px;
+    width: 100px;
+  object-fit: contain;
+}
+.itemDesc{
+    margin-left: 16px;
+}
+.itemDesc>h3{
+    font-size: 16px;
+    color: #212121;
+}
+.itemDesc>p{
+  display: flex;
+  align-items: center;
+    font-size: 14px;
+    color: #878787;
+    margin-bottom: 5px;
+}
+.itemDesc>p>img{
+  margin-left: 5px;
+}
+  .itemPrice > span:nth-child(1) {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #212121;
+  }
+  .itemPrice > span:nth-child(2) {
+    display: inline-block;
+    margin-left: 8px;
+    text-decoration: line-through;
+    font-size: 14px;
+    color: #878787;
+  }
+  .itemPrice > span:nth-child(3) {
+    display: inline-block;
+    margin-left: 8px;
+    color: #388e3c;
+    font-size: 13px;
+    letter-spacing: -0.2px;
+    font-weight: 500;
+  }
+  .addRemoveButton{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+
+  }
+  .addRemoveButton>p{
+    min-width: 46px;
+    border: 1px solid #c2c2c2;
+    margin: 0 5px;
+    border-radius: 2px;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .addRemoveButton>button{
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(#fff,#f9f9f9);
+    display: inline-block;
+    border: 1px solid #c2c2c2;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 50%;
+    padding-top: 1px;
+    line-height: 1;
+  }
+  .buttonDisabled{
+    color: #c2c2c2;
+    border-color: #e0e0e0;
+    cursor: auto;
+  }
+  .placeOrder{
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #f0f0f0;
+    background: #fff;
+    padding: 16px 22px;
+    box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
+}
+.placeOrder>button{
+    background-color: #fb641b;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    border: none;
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: 2px;
+}

@@ -9,6 +9,7 @@ import ItemsListV2 from './components/ItemsList/ItemsListV2'
 import ItemDetail from './components/ItemDetail/ItemDetail'
 import Subcategory from './components/Subcategory/Subcategory'
 import Modalbox from './components/UI/Modalbox'
+import Cart from './components/Cart/Cart'
  
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="itemsv2/:id" element={<ItemsListV2 />} />
           <Route path="detail/:id" element={<ItemDetail />} />
           <Route path="category/:id" element={<Subcategory />} />
+          <Route path="cart" element={<Cart />} />
         </Routes>
       
       <Footer/>

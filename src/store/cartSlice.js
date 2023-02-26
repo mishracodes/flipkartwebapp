@@ -1,20 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState={items:[], totalQuantity:0,totalAmount:0};
+const initialState={items:[], totalQuantity:0,totalAmount:0, discount:0};
 
 const cartSlice=createSlice({
     name:'cart',
     initialState,
     reducers:{
         addToCart(state, action) {
+          
           const newItem = action.payload;
           const existingItem = state.items.find((item) => item.id === newItem.id);
           state.totalQuantity++;
           state.totalAmount += newItem.price;
+          state.discount+=(newItem.originalPrice-newItem.price)
           if (!existingItem) {
             state.items.push({
               id: newItem.id,
-              name: newItem.title,
+              name: newItem.name,
+              brand: newItem.brand,
+              image: newItem.image,
+              originalPrice: newItem.originalPrice,
+              perOff: newItem.perOff,
               price: newItem.price,
               quantity: 1,
               totoalPrice: newItem.price,

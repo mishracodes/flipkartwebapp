@@ -74,7 +74,7 @@
   left: 5px;
   font-weight: 400;
   border-radius: 5px;
-  color: white;
+  color: #f0f0f0;
   background-color: #ff6161;
   margin: 0;
   width: 16px;
@@ -82,4 +82,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cartLink{
+  text-decoration: none;
+  color: #f0f0f0;
 }

@@ -63,7 +63,6 @@ align-self: center;
 }
 .addCartButton > div:active {
   transform: scale(0.95);
-  
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -90,7 +89,51 @@ align-self: center;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
   width: 48%;
 }
+.smAddCartButton{
+  display: none;
+  font-size: 14px;
+  justify-content: space-around;
+}
+.smAddCartButton > div{
+  cursor: pointer;
+}
+.smAddCartButton > div:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.smAddCartButton > div:nth-child(1) {
+  text-align: center;
+  padding: 10px 4px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  float: left;
+  width: 48%;
+  background: #ff9f00;
+  color: #fff;
+}
+.smAddCartButton > div:nth-child(2) {
+  text-align: center;
+
+  background: #fb641b;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  color: #fff;
+  padding: 10px 4px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  width: 48%;
+}
+
 @media (max-width: 768px) {
+  .smAddCartButton{
+    z-index: 3;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
   .addCartButton{
     display: none;
   }
