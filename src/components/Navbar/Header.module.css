@@ -77,7 +77,7 @@
   color: #f0f0f0;
   background-color: #ff6161;
   margin: 0;
-  width: 16px;
+  min-width: 16px;
   height: 16px;
   display: flex;
   justify-content: center;

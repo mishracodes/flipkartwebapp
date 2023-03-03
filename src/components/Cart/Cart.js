@@ -1,10 +1,27 @@
 import React from 'react'
 import classes from './Cart.module.css'
 import GppGoodIcon from '@mui/icons-material/GppGood';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions } from '../../store/cartSlice';
 const Cart = () => {
 
     const cart=useSelector(state=>state.cart)
+    const dispatch=useDispatch();
+
+    const placeOrderHandler= async ()=>{
+        const result = await fetch(`http://localhost:4242/api/create-checkout-session`, {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({cart:cart.items, email:"mishracodes@gmail.com"})
+        })
+        const body = await result.json()
+        window.location.href = body.url
+
+    }
+
+
   return (
     <div className={classes.main}>
         <div className={classes.cartContainer}>
@@ -27,9 +44,9 @@ const Cart = () => {
                                 <span>{e.perOff} off</span>
                             </div>
                             <div className={classes.addRemoveButton}>
-                                <button>-</button>
+                                <button onClick={()=>{dispatch(cartActions.removeFromCart(e.id))}}>-</button>
                                 <p>{e.quantity}</p>
-                                <button>+</button>
+                                <button  onClick={() => { dispatch(cartActions.addToCart({ id: e.id, price: e.price, name: e.name, brand: e.brand, image:e.image, originalPrice: e.originalPrice, perOff: e.perOff })) }}>+</button>
                             </div>
                         </div>
 
@@ -40,7 +57,7 @@ const Cart = () => {
 
 
                     <div className={classes.placeOrder}>
-                        <button>PLACE ORDER</button>
+                        <button onClick={placeOrderHandler}>PLACE ORDER</button>
 
                     </div>
 
@@ -53,8 +70,8 @@ const Cart = () => {
                     <div className={classes.priceHeader}>PRICE DETAILS</div>
                     <div className={classes.priceDesc}>
                         <p><span>Price ({cart.totalQuantity} items)</span> <span>₹{cart.totalAmount+cart.discount}</span></p>
-                        <p><span>Discount</span> <span className={classes.greenText}>− ₹{cart.discount}</span></p>
-                        <p><span>Delivery Charges</span> <span className={classes.greenText}>Free</span></p>
+                        <p><span>Discount</span> <span className={classes.greenText}>{cart.discount>0?`- ₹${cart.discount}`:`₹0`}</span></p>
+                        <p><span>Delivery Charges</span> <span className={classes.greenText}>{cart.totalAmount>0?'Free':'-'}</span></p>
                     </div>
                     <div className={classes.priceTotal}> <span>Total Amount</span> <span>₹{cart.totalAmount}</span></div>
                     <div className={classes.priceSave}>You will save ₹{cart.discount} on this order</div>
