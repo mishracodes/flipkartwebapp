@@ -27,10 +27,9 @@ const fulfillOrder = async (session)=>{
         customer_details:session.customer_details,
         payment_status:session.payment_status,
         shipping_details:session.shipping_details,
-        images: JSON.parse(session.metadata.images),
         timestamp: admin.firestore.FieldValue.serverTimestamp(),
-        description:JSON.parse(session.metadata.desc)
-    })
+        order_placed:'success'
+    }, { merge: true })
     .then(()=>{
         console.log(`SUCCESS: Order ${session.id} has been added to the DB`)
     })

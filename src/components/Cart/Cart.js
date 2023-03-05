@@ -3,6 +3,8 @@ import classes from './Cart.module.css'
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cartSlice';
+import { doc, addDoc, collection, setDoc } from 'firebase/firestore';
+import db from '../../firebase';
 const Cart = () => {
 
     const cart=useSelector(state=>state.cart)
@@ -16,11 +18,42 @@ const Cart = () => {
             },
             body:JSON.stringify({cart:cart.items, email:"mishracodes@gmail.com"})
         })
-        const body = await result.json()
-        window.location.href = body.url
+       const body= await result.json()
+       
+        const {url,id,email,cart:firebaseCart}=body
+        console.log('--------',id,email,firebaseCart);
+        const orderRef = collection(db, "users", email, "orders");
+
+        await setDoc(doc(orderRef,id),{cart:firebaseCart,order_placed:'pending'});
+       
+        window.location.href = url
+        
 
     }
+// const callme=async()=>{
+//     const citiesRef = collection(db, "cities");
 
+// await setDoc(doc(citiesRef, "SF"), {
+//     name: "San Francisco", state: "CA", country: "USA",
+//     capital: false, population: 860000,
+//     regions: ["west_coast", "norcal"] });
+// await setDoc(doc(citiesRef, "LA"), {
+//     name: "Los Angeles", state: "CA", country: "USA",
+//     capital: false, population: 3900000,
+//     regions: ["west_coast", "socal"] });
+// await setDoc(doc(citiesRef, "DC"), {
+//     name: "Washington, D.C.", state: null, country: "USA",
+//     capital: true, population: 680000,
+//     regions: ["east_coast"] });
+// await setDoc(doc(citiesRef, "TOK"), {
+//     name: "Tokyo", state: null, country: "Japan",
+//     capital: true, population: 9000000,
+//     regions: ["kanto", "honshu"] });
+// await setDoc(doc(citiesRef, "BJ"), {
+//     name: "Beijing", state: null, country: "China",
+//     capital: true, population: 21500000,
+//     regions: ["jingjinji", "hebei"] });
+// }
 
   return (
     <div className={classes.main}>

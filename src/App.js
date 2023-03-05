@@ -10,7 +10,8 @@ import ItemDetail from './components/ItemDetail/ItemDetail'
 import Subcategory from './components/Subcategory/Subcategory'
 import Modalbox from './components/UI/Modalbox'
 import Cart from './components/Cart/Cart'
- 
+import OrderItemDetails from './components/OrderItemDetails/OrderItemDetails'
+import OrderHistory from './components/OrderHistory/OrderHistory'
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,6 +25,9 @@ const App = () => {
           <Route path="detail/:id" element={<ItemDetail />} />
           <Route path="category/:id" element={<Subcategory />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="success" element={<OrderItemDetails />} />
+          <Route path="orders" element={<OrderHistory />} />
+          <Route path="order_details/:id" element={<OrderItemDetails />} />
         </Routes>
       
       <Footer/>

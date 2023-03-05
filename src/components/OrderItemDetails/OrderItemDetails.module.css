@@ -1,0 +1,143 @@
+.main{
+    width: 85%;
+    margin: 10px auto;
+}
+.paginate{
+    font-size: 12px;
+    color: #878787
+}
+.cardBanner{
+    background-image: url('https://rukminim1.flixcart.com/www/834/60/promos/28/08/2017/de0c263a-65a0-4f4b-b141-5062917b7d9b.png?q=100');
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+    height: 62px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+.cardBanner>p{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px 0;
+}
+.cardTop{
+    background-color: #fff;
+    margin: 16px 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+    display: grid;
+    grid-template-columns: 33% 25% 42%;
+}
+.topColumn{
+    padding: 24px;
+    color: #212121;
+    border-left: 1px solid #f0f0f0;
+
+}
+.topColumn>h4{
+    font-size: 16px;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.topColumn>h5{
+    font-size: 14px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+.topColumn>p{
+    font-size: 14px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+.address{
+    width: 75%;
+}
+.trackingNumber{
+    margin-top: 15px !important;
+}
+.supercoin{
+    margin: 20px 0;
+    font-size: 14px;
+}
+.supercoin>img{
+    margin-right: 5px;
+}
+.invoiceDownload{
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    font-size: 14px;
+
+}
+.invoiceDownload>div{
+    height: 35px;
+    min-width: 140px;
+    color: #2874f0;
+    border-radius: 1px;
+    border: 1px solid #e0e0e0;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.cardBottom{
+    background-color: #fff;
+    margin: 16px 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+.orderItem{
+    padding: 24px;
+    display: flex;
+    column-gap: 15px;
+    color: #212121;
+}
+.orderItem>img{
+    height: 75px;
+    width: 75px;
+  object-fit: contain;
+}
+.orderItem>div>h2{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.orderItem>div>p{
+    font-size: 12px;
+    color: #878787;
+    margin-bottom: 5px;
+}
+.orderItem>div>h3{
+    font-size: 16px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+.orderItem>div>h4{
+    color: #26a541;
+    font-weight: 500;
+    font-size: 14px;
+}
+.orderRate{
+    padding: 24px;
+    font-size: 14px;
+    color: #2874f0;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+.orderRate>p{
+    cursor: pointer;
+}
+.orderTracking{
+    padding: 24px;
+
+}
+.orderTracking>p{
+    font-size: 12px;
+    font-weight: 500;
+}

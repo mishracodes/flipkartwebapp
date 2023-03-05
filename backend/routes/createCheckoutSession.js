@@ -50,14 +50,15 @@ router.post('/create-checkout-session', async (req, res)=>{
             line_items: transformedItems,
             mode: 'payment',
             success_url: `http://localhost:3000/success`,
-            cancel_url: `http://localhost:3000/checkout`,
+            cancel_url: `http://localhost:3000/failed`,
             metadata:{
                 email,
-                images: JSON.stringify(cart.map(item=>item.image))
             }
         }) 
-    
-        res.status(200).json({url: session.url})
+        // console.log('----------',session.id);
+        
+    // res.status(200)
+        res.status(200).json({url: session.url,cart, id:session.id,email})
           
     }
     catch(error) {

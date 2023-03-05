@@ -14,7 +14,31 @@
 .MuiSlider-track{
     height: 6px !important;
 }
+.css-qivjh0-MuiStepLabel-label.Mui-completed{
+  font-size: 12px !important;
+  color: #26a541 !important;
+}
+.css-qivjh0-MuiStepLabel-label.Mui-active {
+  font-size: 12px !important;
+  color: #26a541 !important;
 
+}
+.css-zpcwqm-MuiStepConnector-root{
+width: 88% !important;
+left: calc(-45% ) !important;
+}
+.css-qivjh0-MuiStepLabel-label.MuiStepLabel-alternativeLabel{
+  font-size: 12px !important;
+}
+.css-z7uhs0-MuiStepConnector-line{
+  border-color: #26a541 !important;
+  border-top-width: 3px !important;
+}
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root{
+  color: #26a541 !important;
+  width: 15px !important;
+
+}
 
 /* //////responsive */
 /* sm */
