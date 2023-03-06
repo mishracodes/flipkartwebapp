@@ -3,7 +3,7 @@ import classes from './Cart.module.css'
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cartSlice';
-import { doc, addDoc, collection, setDoc } from 'firebase/firestore';
+import { doc, collection, setDoc } from 'firebase/firestore';
 import db from '../../firebase';
 const Cart = () => {
 
