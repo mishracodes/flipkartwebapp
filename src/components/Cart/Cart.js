@@ -21,6 +21,8 @@ const Cart = () => {
        const body= await result.json()
        
         const {url,id,email,cart:firebaseCart}=body
+        localStorage.setItem("lastOderId", id);
+
         console.log('--------',id,email,firebaseCart);
         const orderRef = collection(db, "users", email, "orders");
 
@@ -90,7 +92,7 @@ const Cart = () => {
 
 
                     <div className={classes.placeOrder}>
-                        <button onClick={placeOrderHandler}>PLACE ORDER</button>
+                        <button disabled={cart.items.length===0?true:false} onClick={placeOrderHandler}>PLACE ORDER</button>
 
                     </div>
 

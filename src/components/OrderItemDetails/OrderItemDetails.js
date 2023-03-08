@@ -1,20 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoryHeader from '../Navbar/CategoryHeader'
 import classes from './OrderItemDetails.module.css'
 import StarIcon from '@mui/icons-material/Star';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import { Step, StepLabel, Stepper } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import db from '../../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 const OrderItemDetails = () => {
   const steps = ['Order Confirmed', 'Shipped', 'Out For Delivery', 'Delivered'];
   const navigate=useNavigate()
   const location =useLocation()
+  const [orderId, setorderId] = useState()
+  const [orderDetails, setorderDetails] = useState()
+  const {id}=useParams();
+
+  useEffect(() => {
+
+
+    if(location.pathname==='/success'&&localStorage.getItem("lastOderId"))
+      setorderId(localStorage.getItem("lastOderId"))
+    else if(id)
+      setorderId(id)
+
+
+
+      
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  console.log(orderId,orderDetails,"done");
+  
+  const getOrderDetails=async(orderId)=>{
+  
+    getDoc(doc(db, "users", "mishracodes@gmail.com", "orders", orderId)).then(docSnap => {
+      if (docSnap.exists()) {
+        setorderDetails(docSnap.data())
+        
+      } else {
+        console.log("No such doc!");
+      }
+    })
+
+
+  }
+
+  useEffect(() => {
+    if(orderId)
+    getOrderDetails(orderId)
+  }, [orderId])
+  
+
+  
+ 
 
 
   return (
     <>
             <CategoryHeader />
-            <div className={classes.main}>
+            {orderDetails&&<div className={classes.main}>
               <p className={classes.paginate}>Home &gt; My Account &gt; My Orders &gt; OD427238718424770100</p>
               {location.pathname==='/success'&&<div className={classes.cardBanner}>
                 <img src='https://rukminim1.flixcart.com/www/114/30/promos/15/12/2017/97b55f5a-4c8b-410d-a2b4-81f01ecb411e.png?q=100' alt="" width="110px" height="30px"/>
@@ -23,10 +68,11 @@ const OrderItemDetails = () => {
               <div className={classes.cardTop}>
                 <div className={classes.topColumn}>
                   <h4>Delivery Address</h4>
-                  <h5>Sumit Mishra</h5>
-                  <p className={classes.address}>GS MEDICAL COLLEGE , Boys Hostel , Gate no. 2 Near Railway crossing , piplabandpur, Pilkhuwa - 245304, Uttar Pradesh</p>
-                  <p><b>Phone number</b> 9653015245</p>
-                  <p className={classes.trackingNumber}>This order is also tracked by 9653015245</p>
+                  <h5>{orderDetails.customer_details.name}</h5>             
+                  <p className={classes.address}>{orderDetails.shipping_details.address.line1}, {orderDetails.shipping_details.address.city} - {orderDetails.shipping_details.address.postal_code}, {orderDetails.shipping_details.address.state}</p>
+                  <p><b>Phone number</b> {orderDetails.customer_details.phone}</p>
+                  <p><b>Email</b> {orderDetails.customer_details.email}</p>
+                  <p className={classes.trackingNumber}>This order is also tracked by {orderDetails.customer_details.phone}</p>
                 </div>
                 <div className={classes.topColumn}>
                 <h4>Your Rewards</h4>
@@ -47,13 +93,13 @@ const OrderItemDetails = () => {
                 </div>
               </div>
 
-              <div className={classes.cardBottom}>
+              {orderDetails.cart.map(e=><div className={classes.cardBottom}>
                 <div className={classes.orderItem}>
-                  <img src="https://rukminim1.flixcart.com/image/xif0q/hair-treatment/w/1/9/27-5-toppik-hair-building-concealer-fibers-black-27-5-gm-osking-original-imagg8zejbw6ybuh.jpeg" alt=""/>
+                  <img src={`https://wsrv.nl/?url=${e.image}`} alt=""/>
                   <div>
-                    <h2>Osking Hair Growth Building Fiber 27.5gr...</h2>
-                    <p>Seller: Stylazo Store</p>
-                    <h3>₹362</h3>
+                    <h2>{e.name}</h2>
+                    <p>Brand: {e.brand}</p>
+                    <h3>₹{e.price}</h3>
                     <h4>4 Offers Applied</h4>
                     <p>Product has 10 days return policy</p>
 
@@ -76,9 +122,9 @@ const OrderItemDetails = () => {
                   <p><HelpCenterIcon sx={{width:'20px'}}/> Need help?</p>
 
                   </div> 
-              </div>
+              </div>)}
 
-            </div>
+            </div>}
 
 
     </>
