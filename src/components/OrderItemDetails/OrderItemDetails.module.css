@@ -30,6 +30,7 @@
     display: grid;
     grid-template-columns: 33% 25% 42%;
 }
+ 
 .topColumn{
     padding: 24px;
     color: #212121;
@@ -141,3 +142,32 @@
     font-size: 12px;
     font-weight: 500;
 }
+
+ /* xl */
+ @media (max-width: 1280px) {
+    .cardBottom{
+
+    }
+  }
+
+   /* lg */
+   @media (max-width: 1024px) {
+    .cardTop {
+        grid-template-columns: 50% 50%;
+    }
+    .cardBottom{
+        grid-template-columns: 50% 50%;
+
+    }
+  }
+
+   /* md */
+   @media (max-width: 768px) {
+    .cardTop {
+        grid-template-columns: 100%;
+    }
+    .cardBottom{
+        grid-template-columns: 100%;
+
+    }
+  }

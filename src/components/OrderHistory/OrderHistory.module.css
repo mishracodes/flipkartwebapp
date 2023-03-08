@@ -30,21 +30,59 @@
     height: 75px;
     object-fit: contain;
 }
+
 .itemDetails{
     display: grid;
     grid-template-columns: 40% 20% 40%;
     color: #212121;
 }
+.itemPrice{
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+  /* xl */
+  @media (max-width: 1280px) {
+    .itemDetails {
+        grid-template-columns: 33% 33% 33%;
+    }
+  } 
+
+   /* lg */
+    @media (max-width: 1024px) {
+    .card{
+    grid-template-columns: 15% 85%;
+
+    }
+    .itemDetails {
+        grid-template-columns: 50% 50%;
+    }
+  } 
+
+   /* md */
+    @media (max-width: 768px) {
+    .card{
+        grid-template-columns: 20% 80%;
+
+    }
+    .itemDetails {
+        grid-template-columns: 100%;
+    }
+    .itemPrice{
+        text-align: start;
+    }
+  } 
+
+
+
 .itemName{
     font-size: 14px;
     margin-bottom: 10px;
     font-weight: 400;
 }
-.itemPrice{
-    font-size: 14px;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
+
 .expectedDelivery{
     color: #212121;
     font-size: 14px;
