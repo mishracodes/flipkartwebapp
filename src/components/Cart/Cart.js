@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cartSlice';
 import { doc, collection, setDoc } from 'firebase/firestore';
 import db from '../../firebase';
+import { useAuth0 } from '@auth0/auth0-react';
 const Cart = () => {
 
     const cart=useSelector(state=>state.cart)
+  const {loginWithRedirect,isAuthenticated } = useAuth0();
+
     const dispatch=useDispatch();
 
     const placeOrderHandler= async ()=>{
-        const result = await fetch(`http://localhost:4242/api/create-checkout-session`, {
+        const result = await fetch(`https://shipprkart.onrender.com/api/create-checkout-session`, {
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -32,34 +35,18 @@ const Cart = () => {
         
 
     }
-// const callme=async()=>{
-//     const citiesRef = collection(db, "cities");
 
-// await setDoc(doc(citiesRef, "SF"), {
-//     name: "San Francisco", state: "CA", country: "USA",
-//     capital: false, population: 860000,
-//     regions: ["west_coast", "norcal"] });
-// await setDoc(doc(citiesRef, "LA"), {
-//     name: "Los Angeles", state: "CA", country: "USA",
-//     capital: false, population: 3900000,
-//     regions: ["west_coast", "socal"] });
-// await setDoc(doc(citiesRef, "DC"), {
-//     name: "Washington, D.C.", state: null, country: "USA",
-//     capital: true, population: 680000,
-//     regions: ["east_coast"] });
-// await setDoc(doc(citiesRef, "TOK"), {
-//     name: "Tokyo", state: null, country: "Japan",
-//     capital: true, population: 9000000,
-//     regions: ["kanto", "honshu"] });
-// await setDoc(doc(citiesRef, "BJ"), {
-//     name: "Beijing", state: null, country: "China",
-//     capital: true, population: 21500000,
-//     regions: ["jingjinji", "hebei"] });
-// }
 
   return (
     <div className={classes.main}>
-        <div className={classes.cartContainer}>
+        {!isAuthenticated&&<div className={classes.notLoggedin}>
+        <img src='https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90' alt=''/>
+        <h3>Missing Cart items?</h3>
+        <p>Login to see the items you added previously</p>
+        <button onClick={() => loginWithRedirect()}>Login</button>
+        </div>}
+
+        {isAuthenticated&&<div className={classes.cartContainer}>
             <div className={classes.leftBar}>
                 <div className={classes.deliverTo}>
                     <div className={classes.deliveryName}>Deliver to: <span>Amit Kumar Mishra</span></div>
@@ -118,7 +105,7 @@ const Cart = () => {
 
             </div>
             
-        </div>
+        </div>}
     </div>
   )
 }

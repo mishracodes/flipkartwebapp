@@ -8,14 +8,26 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ItemsListV2 from './components/ItemsList/ItemsListV2'
 import ItemDetail from './components/ItemDetail/ItemDetail'
 import Subcategory from './components/Subcategory/Subcategory'
-import Modalbox from './components/UI/Modalbox'
+// import Modalbox from './components/UI/Modalbox'
 import Cart from './components/Cart/Cart'
 import OrderItemDetails from './components/OrderItemDetails/OrderItemDetails'
 import OrderHistory from './components/OrderHistory/OrderHistory'
+import LeftNavbar from './components/Navbar/LeftNavbar'
+import { useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 const App = () => {
+  const menuSmStatus=useSelector(state=>state.ui.menuSmStatus)
+
+  const {isLoading } = useAuth0();
+
   return (
+    <>
+    {isLoading&&<div className='loginLoader'>Loading...</div>}
+    
     <BrowserRouter>
-    <Modalbox message="Hi User this website is using api deployed on render.com free tier so the 1st response from the site might take some time. Hence you may find the products loading slow for the first time. Subsequent requests might not take that much time. Sorry for inconvenience."/>
+    {menuSmStatus&&<LeftNavbar/>}
+    {/* <Modalbox message="Hi User this website is using api deployed on render.com free tier so the 1st response from the site might take some time. Hence you may find the products loading slow for the first time. Subsequent requests might not take that much time. Sorry for inconvenience."/> */}
+    
       <Header/>
       
         <Routes>
@@ -32,6 +44,7 @@ const App = () => {
       
       <Footer/>
       </BrowserRouter>
+      </>
   )
 }
 

@@ -66,11 +66,13 @@ const MainCategory = () => {
     ]
    
   return (
-    <div  style={{marginTop:"56px"}} className={classes.main__category__container}>
+    <div  style={{marginTop:"56px"}}>
+    <div  className={classes.main__category__container}>
         {categories&&categories.map((e,i)=>{
             return  <CategoryItems key={e._id} name={e.name} image={e.image} id={e._id} elementId={i} />
         })}
        
+    </div>
     </div>
   )
 }

@@ -49,8 +49,8 @@ router.post('/create-checkout-session', async (req, res)=>{
             ],
             line_items: transformedItems,
             mode: 'payment',
-            success_url: `http://localhost:3000/success`,
-            cancel_url: `http://localhost:3000/failed`,
+            success_url: `https://flipkartv2.netlify.app/success`,
+            cancel_url: `https://flipkartv2.netlify.app/failed`,
             metadata:{
                 email,
             }

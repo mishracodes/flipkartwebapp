@@ -10,7 +10,40 @@
     margin: auto;
     padding: 16px;
   }
- 
+  .notLoggedin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 100px auto 50px auto;
+    padding: 50px 16px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+  }
+  .notLoggedin>img{
+    width: 221px;
+  }
+  .notLoggedin>h3{
+    font-size: 18px;
+    margin-top: 24px;
+    color: #212121;
+  }
+  .notLoggedin>p{
+    font-size: 12px;
+    margin-top: 10px;
+    color: #212121;
+  }
+ .notLoggedin>button{
+  background-color: #fb641b;
+  font-size: 14px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    border: none;
+    color: #fff;
+    padding: 12px 75px;
+    border-radius: 2px;
+ }
   .leftBar{
     width: 65%;
   }

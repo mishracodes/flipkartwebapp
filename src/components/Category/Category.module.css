@@ -30,4 +30,39 @@
   color: #2874f0;
 }
 
+/* xl */
+@media (max-width: 1280px) {
+  .main__category__container{
+    column-gap: 30px;
+  }
+  .main__category__item__img{
+    width: 50px;
+    height: 50px;
+  }
+  .main__category__item__para{
+    font-size: 13px;
 
+  }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  .main__category__container{
+    column-gap: 20px;
+  }
+  .main__category__item__img{
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+/* md */
+@media (max-width: 768px) {
+  .main__category__container{
+    column-gap: 10px;
+  }
+  .main__category__container{
+    display: none;
+  }
+}

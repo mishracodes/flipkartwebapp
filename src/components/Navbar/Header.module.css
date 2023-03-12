@@ -59,6 +59,7 @@
 }
 .nav__item__username{
   white-space: nowrap;
+  cursor: pointer;
 }
 .nav__item__username:hover .nav__item__expandmore_user{
   transform: rotate(180deg);
@@ -133,4 +134,20 @@
   font-size: 14px;
   font-weight: 400;
 
+}
+.menuSm{
+  cursor: pointer;
+  display: none;
+  margin: 0 8px;
+  padding: 5px;
+}
+/* md */
+@media (max-width: 768px) {
+  .menuSm{
+    display: block;
+  }
+  .nav_main_logo{
+    position: relative;
+    left: -25px
+  }
 }
