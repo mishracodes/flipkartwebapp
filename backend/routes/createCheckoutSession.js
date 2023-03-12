@@ -19,11 +19,7 @@ router.post('/create-checkout-session', async (req, res)=>{
               },
               quantity: e.quantity,
         }))
-    console.log('cart ------------------------------------------------------',cart);
-    console.log('email------------------------------------------------------',email);
-    console.log('transformedItems------------------------------------------------------',transformedItems);
-    
-        
+   
     
         const session = await stripe.checkout.sessions.create({
             shipping_address_collection: {allowed_countries: ['US', 'CA','GB','IN']},
