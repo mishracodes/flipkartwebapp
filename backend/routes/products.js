@@ -141,7 +141,6 @@ router.delete('/delete/:id', async (req, res) => {
 //ROUTE:5 Set Bulk Products: POST "/api/products/setbulkproduct". Login required 
 // router.post('/admsetbulkproduct',fetchuser, async(req,res)=>{
 router.post('/addbulk', async (req, res) => {
-  // console.log(req);
 
   try {
     // if("6265107b17c6a25656bd3e3b"!==req.user.id)
@@ -154,7 +153,6 @@ router.post('/addbulk', async (req, res) => {
     // }
     let data = await req.body.data;
     for (let i in data) {
-      console.log(data[i]);
       
       const {  name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description   } = data[i];
       const newProduct = new Products({  name, subcategory, price, discountPrice, image, fAssured, rate, count, brand, specifications, description   })

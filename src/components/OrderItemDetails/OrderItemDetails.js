@@ -30,7 +30,6 @@ const OrderItemDetails = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log(orderId,orderDetails,"done");
   
   const getOrderDetails=async(orderId)=>{
   

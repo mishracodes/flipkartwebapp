@@ -8,7 +8,6 @@ const uiSlice=createSlice({
     reducers:{
         toggleSmMenu(state) {
           state.menuSmStatus=!state.menuSmStatus
-          console.log('clice',state.menuSmStatus);
           
         }
     }

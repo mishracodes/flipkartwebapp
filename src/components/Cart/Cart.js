@@ -26,7 +26,6 @@ const Cart = () => {
         const {url,id,email,cart:firebaseCart}=body
         localStorage.setItem("lastOderId", id);
 
-        console.log('--------',id,email,firebaseCart);
         const orderRef = collection(db, "users", email, "orders");
 
         await setDoc(doc(orderRef,id),{cart:firebaseCart,order_placed:'pending'});
