@@ -51,6 +51,7 @@ const OrderItemDetails = () => {
   }, [orderId])
   
 
+  console.log('orderDetails',orderDetails);
   
  
 
