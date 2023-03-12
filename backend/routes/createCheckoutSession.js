@@ -19,6 +19,9 @@ router.post('/create-checkout-session', async (req, res)=>{
               },
               quantity: e.quantity,
         }))
+    console.log('cart ------------------------------------------------------',cart);
+    console.log('email------------------------------------------------------',email);
+    console.log('transformedItems------------------------------------------------------',transformedItems);
     
         
     
