@@ -55,7 +55,6 @@ router.post('/create-checkout-session', async (req, res)=>{
                 email,
             }
         }) 
-        // console.log('----------',session.id);
         
     // res.status(200)
         res.status(200).json({url: session.url,cart, id:session.id,email})
